@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
 
-<title>Seminar101 slides</title>
+<title>Seminar08 slides</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13202,19 +13202,2033 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="PYTHON-3">PYTHON 3<a class="anchor-link" href="#PYTHON-3">&#182;</a></h1><h2 id="&#1070;&#1085;&#1080;&#1090;-&#1090;&#1077;&#1089;&#1090;&#1080;&#1088;&#1086;&#1074;&#1072;&#1085;&#1080;&#1077;">&#1070;&#1085;&#1080;&#1090;-&#1090;&#1077;&#1089;&#1090;&#1080;&#1088;&#1086;&#1074;&#1072;&#1085;&#1080;&#1077;<a class="anchor-link" href="#&#1070;&#1085;&#1080;&#1090;-&#1090;&#1077;&#1089;&#1090;&#1080;&#1088;&#1086;&#1074;&#1072;&#1085;&#1080;&#1077;">&#182;</a></h2><p>MIPT 2021</p>
+<h1 id="Web-&amp;-Scraping">Web &amp; Scraping<a class="anchor-link" href="#Web-&amp;-Scraping">&#182;</a></h1><p>Requires: urllib, requests, socket, re, lxml, io, bs4, scrapy, sqlite3, pandas.</p>
+<p>План:</p>
+<ul>
+<li>101 101</li>
+<li>HTML 101</li>
+<li>HTTP + REST 101</li>
+<li>Web scraping</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Убедитесь, что вотэтовотвсё установлено</span>
+<span class="kn">import</span> <span class="nn">urllib</span><span class="o">,</span> <span class="nn">requests</span><span class="o">,</span> <span class="nn">socket</span><span class="o">,</span> <span class="nn">re</span><span class="o">,</span> <span class="nn">lxml</span><span class="o">,</span> <span class="nn">io</span><span class="o">,</span> <span class="nn">bs4</span><span class="o">,</span> <span class="nn">scrapy</span><span class="o">,</span> <span class="nn">sqlite3</span><span class="o">,</span> <span class="nn">pandas</span><span class="o">,</span> <span class="nn">sqlalchemy</span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Заметка на полях:</p>
+<h1 id="101-101">101 101<a class="anchor-link" href="#101-101">&#182;</a></h1><p>В американской системе образования курсы имеют индекс, например, <a href="https://lagunita.stanford.edu/courses/Engineering/CS101/Summer2014/about">CS101</a>.</p>
+<p>101 -- это вводный курс в какую-то тему, просто так повелось. Intro.</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="&#1048;&#1085;&#1090;&#1077;&#1088;&#1085;&#1077;&#1090;-101">&#1048;&#1085;&#1090;&#1077;&#1088;&#1085;&#1077;&#1090; 101<a class="anchor-link" href="#&#1048;&#1085;&#1090;&#1077;&#1088;&#1085;&#1077;&#1090;-101">&#182;</a></h1><p>Что происходит, когда вы вбиваете в поисковике адрес и жмете Enter?</p>
+<p>URL:<br>
+<code>&lt;схема&gt;:[//[&lt;логин&gt;[:&lt;пароль&gt;]@]&lt;хост&gt;[:&lt;порт&gt;]][/&lt;URL‐путь&gt;][?&lt;параметры&gt;][#&lt;якорь&gt;]</code><br>
+Например:<br>
+<code>https://pp.userapi.com/c834101/v834101778/13450d/9yxFBjsPxN8.jpg</code></p>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Вы выступаете <strong>клиентом</strong></p>
+<ol>
+<li><strong>DNS</strong>: URL -&gt; IP-адрес и порт <strong>сервера</strong> (87.240.129.71:443)</li>
+<li><strong>HTTP(S)</strong>: IP + URL-путь + параметры -&gt; <strong>ресурс</strong> (текст (в т.ч. <em>HTML-документ</em>), картинка, звук и т.д.)</li>
+<li><strong>Движок браузера</strong> пытается отрисовать документ</li>
+<li><em>Скорее всего</em>, внутри документа написано, что ему требуются еще какие-то ресурсы, у них есть URI, т.е. возвращаемся к п.1</li>
+<li>Пока все это происходит, (и после того, как произошло), выполняется <strong>JavaScript</strong>-код</li>
+</ol>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="HTML-101">HTML 101<a class="anchor-link" href="#HTML-101">&#182;</a></h1><p>HyperText Markup Language</p>
+<p>HTML -- язык разметки, который используется для web-страниц.</p>
+<p>Это механизм для получения структурного текста, который понимают браузеры.</p>
+<p>Структура в тексте задаётся вложенными тегами, теги определяют то, как текст будет показан (отрендерен).</p>
+<p>Это тег: <code>&lt;тег&gt;</code>, теги бывают открывающими (<code>&lt;тег&gt;</code>) и закрывающими (<code>&lt;/тег&gt;</code>).</p>
+<p>Пример HTML-разметки:</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+   <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;utf-8&quot;</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>HTML Document<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+   <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+   <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span> <span class="c">&lt;!-- p -- это параграф, а в такие странные скобки заключается комментарий --&gt;</span>
+         <span class="p">&lt;</span><span class="nt">b</span><span class="p">&gt;</span>
+            Этот текст будет полужирным, <span class="p">&lt;</span><span class="nt">i</span><span class="p">&gt;</span>а этот — ещё и курсивным<span class="p">&lt;/</span><span class="nt">i</span><span class="p">&gt;</span>.
+         <span class="p">&lt;/</span><span class="nt">b</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+   <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+<p>Так он выглядит после рендеринга:</p>
+<p>&lt;!DOCTYPE html&gt;</p>
+<html>
+   <head>
+      <meta charset="utf-8" />
+      <title>HTML Document</title>
+   </head>
+   <body>
+      <p> <!-- p -- это параграф, а в такие странные скобки заключается комментарий -->
+         <b>
+            Этот текст будет полужирным, <i>а этот — ещё и курсивным</i>.
+         </b>
+      </p>
+   </body>
+</html><p>Видно, что HTML-разметка имеет древовидную структуру:<br>
+каждый тег (вершина дерева) имеет 0 (тогда это лист дерева) или больше (тогда это внутренняя вершина) вложенных в него тегов.</p>
+<p>Значит, чтобы доставать из HTML какую-то информацию, можно использовать его структуру.</p>
+<p>Мы этим займёмся чуть позже.</p>
+<h3 id="P.S.">P.S.<a class="anchor-link" href="#P.S.">&#182;</a></h3><p>На самом деле, такую же структуру имеет и формат XML (другой язык разметки).</p>
+<p>Формально, HTML -- это более стандартизированное подмножество XML.</p>
+<h3 id="P.P.S.">P.P.S.<a class="anchor-link" href="#P.P.S.">&#182;</a></h3><p>А ещё у тегов бывают <strong>атрибуты</strong>:</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;http://example.com&quot;</span><span class="p">&gt;</span>Ссылка на example.com<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</pre></div>
+<p>Отрендерим этот кусок:
+<a href="http://example.com">Ссылка на example.com</a></p>
+<h3 id="P.P.P.S.">P.P.P.S.<a class="anchor-link" href="#P.P.P.S.">&#182;</a></h3><p>А этот текст (безусловно, имеющий структуру), был написан с помощью другого языка разметки -- <strong>Markdown</strong>.</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="HTTP-101">HTTP 101<a class="anchor-link" href="#HTTP-101">&#182;</a></h2><p>HyperText Transfer Protocol</p>
+<p>Протокол передачи гипертекста:</p>
+<ul>
+<li><strong>Протокол</strong> -- набор логических соглашений о взаимодействии программ, стандарт;</li>
+<li><strong>передача</strong> -- мы живём в интернете, т.е. мир не ограничивается нашим компьютером =&gt; информацию надо передавать;</li>
+<li><strong>гипертекст</strong> -- HTML, например.</li>
+</ul>
+<p>Основная идея: все компьютеры делятся на <strong>сервера</strong> (те, что хранят информацию) и <strong>клиенты</strong> (те, что запрашивают её).</p>
+<p>На самом деле, в HTTP мы передаём не только гипертекст, а <strong>ресурсы</strong> -- философское обобщение, куда попадает и гипертекст, и картинки, и музыка и т.д. Но стандарт подходит для всего этого.</p>
+<p>Каждый ресурс имеет адрес -- <strong>URI</strong> (Uniform Resource Identifier) -- аналог пути в системе компьютера.</p>
+<p>Не будем говорить про низкоуровневую сторону вопроса: стек TCP/IP, сокеты, порты и т.д.</p>
+<h2 id="&#1057;&#1090;&#1088;&#1091;&#1082;&#1090;&#1091;&#1088;&#1072;-HTTP">&#1057;&#1090;&#1088;&#1091;&#1082;&#1090;&#1091;&#1088;&#1072; HTTP<a class="anchor-link" href="#&#1057;&#1090;&#1088;&#1091;&#1082;&#1090;&#1091;&#1088;&#1072;-HTTP">&#182;</a></h2><p>Чтобы получить данные, клиент делает запрос на сервер. В запросе должны быть 3 части:</p>
+<ul>
+<li>Starting line -- определяет тип сообщения;</li>
+<li>Headers -- характеризуют тело сообщения, параметры передачи и прочие сведения;</li>
+<li>Message body -- непосредственно данные сообщения.</li>
+</ul>
+<p>Ответное сообщение от сервера имеет такую же структуру.</p>
+<p>Чтобы посылать эти запросы "руками", а не через браузер, можно использовать утилиту <code>curl</code>. Ей и воспользуемся.</p>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>curl example.com/index.html -v
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>*   Trying 93.184.216.34:80...
+* TCP_NODELAY set
+* Connected to example.com (93.184.216.34) port 80 (#0)
+&gt; GET /index.html HTTP/1.1
+&gt; Host: example.com
+&gt; User-Agent: curl/7.68.0
+&gt; Accept: */*
+&gt; 
+* Mark bundle as not supporting multiuse
+&lt; HTTP/1.1 200 OK
+&lt; Accept-Ranges: bytes
+&lt; Age: 86264
+&lt; Cache-Control: max-age=604800
+&lt; Content-Type: text/html; charset=UTF-8
+&lt; Date: Fri, 26 Mar 2021 16:38:24 GMT
+&lt; Etag: &#34;3147526947+gzip&#34;
+&lt; Expires: Fri, 02 Apr 2021 16:38:24 GMT
+&lt; Last-Modified: Thu, 17 Oct 2019 07:18:26 GMT
+&lt; Server: ECS (dcb/7F83)
+&lt; Vary: Accept-Encoding
+&lt; X-Cache: HIT
+&lt; Content-Length: 1256
+&lt; 
+&lt;!doctype html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Example Domain&lt;/title&gt;
+
+    &lt;meta charset=&#34;utf-8&#34; /&gt;
+    &lt;meta http-equiv=&#34;Content-type&#34; content=&#34;text/html; charset=utf-8&#34; /&gt;
+    &lt;meta name=&#34;viewport&#34; content=&#34;width=device-width, initial-scale=1&#34; /&gt;
+    &lt;style type=&#34;text/css&#34;&gt;
+    body {
+        background-color: #f0f0f2;
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, system-ui, BlinkMacSystemFont, &#34;Segoe UI&#34;, &#34;Open Sans&#34;, &#34;Helvetica Neue&#34;, Helvetica, Arial, sans-serif;
+        
+    }
+    div {
+        width: 600px;
+        margin: 5em auto;
+        padding: 2em;
+        background-color: #fdfdff;
+        border-radius: 0.5em;
+        box-shadow: 2px 3px 7px 2px rgba(0,0,0,0.02);
+    }
+    a:link, a:visited {
+        color: #38488f;
+        text-decoration: none;
+    }
+    @media (max-width: 700px) {
+        div {
+            margin: 0 auto;
+            width: auto;
+        }
+    }
+    &lt;/style&gt;    
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;div&gt;
+    &lt;h1&gt;Example Domain&lt;/h1&gt;
+    &lt;p&gt;This domain is for use in illustrative examples in documents. You may use this
+    domain in literature without prior coordination or asking for permission.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&#34;https://www.iana.org/domains/example&#34;&gt;More information...&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+* Connection #0 to host example.com left intact
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#1052;&#1077;&#1090;&#1086;&#1076;&#1099;-HTTP">&#1052;&#1077;&#1090;&#1086;&#1076;&#1099; HTTP<a class="anchor-link" href="#&#1052;&#1077;&#1090;&#1086;&#1076;&#1099;-HTTP">&#182;</a></h2><p>HTTP метод определяет операцию, которую мы хотим произвести над ресурсом.</p>
+<p>Самые частые методы: GET, POST, PUT, DELETE (но есть и другие).</p>
+<ul>
+<li><strong>GET</strong> -- запрос содержимого ресурса. <br>GET-запросы идемпотентны. Поэтому они могут кэшироваться.</li>
+<li><strong>POST</strong> -- передача данных на ресурс (например, при отправке комментария на форуме или вводе пароля на сайте). <br> Не идемпотентны =&gt; при отправке одного и того же комментария на форум он появится там дважды.  <br>Не кэшируются.</li>
+<li><strong>PUT</strong> -- передача данных в конкретный URI (изменение существующего ресурса). Не кэшируются.</li>
+<li><strong>DELETE</strong> -- удаление ресурса.</li>
+</ul>
+<h2 id="&#1050;&#1086;&#1076;&#1099;-HTTP">&#1050;&#1086;&#1076;&#1099; HTTP<a class="anchor-link" href="#&#1050;&#1086;&#1076;&#1099;-HTTP">&#182;</a></h2><p>В ответном сообщении придёт код ответа HTTP, который определяет результат выполнения операции.</p>
+<p>Самые частые коды: <code>200 OK</code>, <code>400 BadRequest</code>, <code>404 Not Found</code>, <code>500 Internal Server Error</code>.</p>
+<p>Общий обзор кодов:</p>
+<ul>
+<li><strong>1xx</strong> -- Informational. Информационные коды, например, <code>102 Processing</code> (запрос пока обрабатывается);</li>
+<li><strong>2xx</strong> -- Success. Успех. Всё хорошо, запрос отработал и ничего не сломал. По крайней мере, пока.</li>
+<li><strong>3xx</strong> -- Redirection. Перенаправление на другой ресурс/страницу.</li>
+<li><strong>4xx</strong> -- Client error. Ошибка клиента (неверные данные запроса или неправильный путь).</li>
+<li><strong>5xx</strong> -- Server error. Что-то сломалось на сервере (там поделили на ноль, например).</li>
+</ul>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#1056;&#1072;&#1079;&#1073;&#1086;&#1088;-&#1087;&#1088;&#1080;&#1084;&#1077;&#1088;&#1072;">&#1056;&#1072;&#1079;&#1073;&#1086;&#1088; &#1087;&#1088;&#1080;&#1084;&#1077;&#1088;&#1072;<a class="anchor-link" href="#&#1056;&#1072;&#1079;&#1073;&#1086;&#1088;-&#1087;&#1088;&#1080;&#1084;&#1077;&#1088;&#1072;">&#182;</a></h2><p>Давайте ещё раз посмотрим на запрос к example.com/index.html.</p>
+<p>Служебная информация от <code>curl</code>:</p>
+
+<pre><code>*   Trying 2606:2800:220:1:248:1893:25c8:1946...
+*   Trying 93.184.216.34...
+* Connected to example.com (2606:2800:220:1:248:1893:25c8:1946) port 80 (#0)</code></pre>
+<p>Запрос клиента:</p>
+
+<pre><code>&gt; GET /index.html HTTP/1.1    # Starting line: метод GET, URI -- /index.html, версия протокола -- HTTP/1.1
+&gt; Host: example.com           # Заголовки сообщения
+&gt; User-Agent: curl/7.47.0
+&gt; Accept: */*
+&gt;                             # Пустое тело, т.к. мы ничего не передали на сервер.</code></pre>
+<p>Ответ сервера:</p>
+
+<pre><code>&lt; HTTP/1.1 200 OK                          # Starting line: версия протокола и код ответа
+&lt; Cache-Control: max-age=604800            # Заголовки ответа
+&lt; Content-Type: text/html; charset=UTF-8
+&lt; Date: Tue, 19 Mar 2019 21:25:21 GMT
+&lt; Etag: "1541025663+gzip+ident"
+&lt; Expires: Tue, 26 Mar 2019 21:25:21 GMT
+&lt; Last-Modified: Fri, 09 Aug 2013 23:54:35 GMT
+&lt; Server: ECS (bsa/EB1E)
+&lt; Vary: Accept-Encoding
+&lt; X-Cache: HIT
+&lt; Content-Length: 1270
+&lt;                                          # Пустая строка -- нужна по стандарту
+&lt;!doctype html&gt;                            # Тело ответа -- HTML-документ
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Example Domain&lt;/title&gt;
+. . .</code></pre>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="REST">REST<a class="anchor-link" href="#REST">&#182;</a></h2><p><a href="https://en.wikipedia.org/wiki/Representational_state_transfer">Representational State Transfer</a></p>
+<p>Набор дополнительных ограничений на HTTP, указывающий, как правильно работать с методами, кодами и т.д.</p>
+<p>Можно назвать его аналогом pep для Питона.</p>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="https://faun.pub/http-and-everything-you-need-to-know-about-it-8273bc224491---&#1076;&#1086;&#1089;&#1090;&#1091;&#1087;&#1085;&#1086;-&#1087;&#1088;&#1086;-HTTP-(english)"><a href="https://faun.pub/http-and-everything-you-need-to-know-about-it-8273bc224491">https://faun.pub/http-and-everything-you-need-to-know-about-it-8273bc224491</a> - &#1076;&#1086;&#1089;&#1090;&#1091;&#1087;&#1085;&#1086; &#1087;&#1088;&#1086; HTTP (english)<a class="anchor-link" href="#https://faun.pub/http-and-everything-you-need-to-know-about-it-8273bc224491---&#1076;&#1086;&#1089;&#1090;&#1091;&#1087;&#1085;&#1086;-&#1087;&#1088;&#1086;-HTTP-(english)">&#182;</a></h2>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Web-scraping.-&#1055;&#1088;&#1072;&#1082;&#1090;&#1080;&#1082;&#1072;!">Web scraping. &#1055;&#1088;&#1072;&#1082;&#1090;&#1080;&#1082;&#1072;!<a class="anchor-link" href="#Web-scraping.-&#1055;&#1088;&#1072;&#1082;&#1090;&#1080;&#1082;&#1072;!">&#182;</a></h1><ul>
+<li>Получение html</li>
+<li>Парсинг html</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#1055;&#1086;&#1083;&#1091;&#1095;&#1077;&#1085;&#1080;&#1077;-html">&#1055;&#1086;&#1083;&#1091;&#1095;&#1077;&#1085;&#1080;&#1077; html<a class="anchor-link" href="#&#1055;&#1086;&#1083;&#1091;&#1095;&#1077;&#1085;&#1080;&#1077;-html">&#182;</a></h2><p>Варианты инструментов:</p>
+<ul>
+<li>urllib </li>
+<li>requests (de-facto standard)</li>
+<li>socket (low-level)</li>
+</ul>
+
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="urllib">urllib<a class="anchor-link" href="#urllib">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">urllib.request</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="s1">&#39;http://example.com/&#39;</span><span class="p">)</span>
+<span class="n">html</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>b&#39;&lt;!doctype html&gt;\n&lt;html&gt;\n&lt;head&gt;\n    &lt;title&gt;Example Domain&lt;/title&gt;\n\n    &lt;meta charset=&#34;utf-8&#34; /&gt;\n    &lt;meta http-equiv=&#34;Content-type&#34; content=&#34;text/html; charset=utf-8&#34; /&gt;\n    &lt;meta name=&#34;viewport&#34; content=&#34;width=device-width, initial-scale=1&#34; /&gt;\n    &lt;style type=&#34;text/css&#34;&gt;\n    body {\n        background-color: #f0f0f2;\n        margin: 0;\n        padding: 0;\n        font-family: -apple-system, system-ui, BlinkMacSystemFont, &#34;Segoe UI&#34;, &#34;Open Sans&#34;, &#34;Helvetica Neue&#34;, Helvetica, Arial, sans-serif;\n        \n    }\n    div {\n        width: 600px;\n        margin: 5em auto;\n        padding: 2em;\n        background-color: #fdfdff;\n        border-radius: 0.5em;\n        box-shadow: 2px 3px 7px 2px rgba(0,0,0,0.02);\n    }\n    a:link, a:visited {\n        color: #38488f;\n        text-decoration: none;\n    }\n    @media (max-width: 700px) {\n        div {\n            margin: 0 auto;\n            width: auto;\n        }\n    }\n    &lt;/style&gt;    \n&lt;/head&gt;\n\n&lt;body&gt;\n&lt;div&gt;\n    &lt;h1&gt;Example Domain&lt;/h1&gt;\n    &lt;p&gt;This domain is for use in illustrative examples in documents. You may use this\n    domain in literature without prior coordination or asking for permission.&lt;/p&gt;\n    &lt;p&gt;&lt;a href=&#34;https://www.iana.org/domains/example&#34;&gt;More information...&lt;/a&gt;&lt;/p&gt;\n&lt;/div&gt;\n&lt;/body&gt;\n&lt;/html&gt;\n&#39;
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">html</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;!doctype html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Example Domain&lt;/title&gt;
+
+    &lt;meta charset=&#34;utf-8&#34; /&gt;
+    &lt;meta http-equiv=&#34;Content-type&#34; content=&#34;text/html; charset=utf-8&#34; /&gt;
+    &lt;meta name=&#34;viewport&#34; content=&#34;width=device-width, initial-scale=1&#34; /&gt;
+    &lt;style type=&#34;text/css&#34;&gt;
+    body {
+        background-color: #f0f0f2;
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, system-ui, BlinkMacSystemFont, &#34;Segoe UI&#34;, &#34;Open Sans&#34;, &#34;Helvetica Neue&#34;, Helvetica, Arial, sans-serif;
+        
+    }
+    div {
+        width: 600px;
+        margin: 5em auto;
+        padding: 2em;
+        background-color: #fdfdff;
+        border-radius: 0.5em;
+        box-shadow: 2px 3px 7px 2px rgba(0,0,0,0.02);
+    }
+    a:link, a:visited {
+        color: #38488f;
+        text-decoration: none;
+    }
+    @media (max-width: 700px) {
+        div {
+            margin: 0 auto;
+            width: auto;
+        }
+    }
+    &lt;/style&gt;    
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;div&gt;
+    &lt;h1&gt;Example Domain&lt;/h1&gt;
+    &lt;p&gt;This domain is for use in illustrative examples in documents. You may use this
+    domain in literature without prior coordination or asking for permission.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&#34;https://www.iana.org/domains/example&#34;&gt;More information...&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>На всякий случай сохраним этот html, пригодится.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;example.com.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>А что, кроме html?</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">dir</span><span class="p">(</span><span class="n">response</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[&#39;__abstractmethods__&#39;, &#39;__class__&#39;, &#39;__del__&#39;, &#39;__delattr__&#39;, &#39;__dict__&#39;, &#39;__dir__&#39;, &#39;__doc__&#39;, &#39;__enter__&#39;, &#39;__eq__&#39;, &#39;__exit__&#39;, &#39;__format__&#39;, &#39;__ge__&#39;, &#39;__getattribute__&#39;, &#39;__gt__&#39;, &#39;__hash__&#39;, &#39;__init__&#39;, &#39;__init_subclass__&#39;, &#39;__iter__&#39;, &#39;__le__&#39;, &#39;__lt__&#39;, &#39;__module__&#39;, &#39;__ne__&#39;, &#39;__new__&#39;, &#39;__next__&#39;, &#39;__reduce__&#39;, &#39;__reduce_ex__&#39;, &#39;__repr__&#39;, &#39;__setattr__&#39;, &#39;__sizeof__&#39;, &#39;__str__&#39;, &#39;__subclasshook__&#39;, &#39;_abc_impl&#39;, &#39;_checkClosed&#39;, &#39;_checkReadable&#39;, &#39;_checkSeekable&#39;, &#39;_checkWritable&#39;, &#39;_check_close&#39;, &#39;_close_conn&#39;, &#39;_get_chunk_left&#39;, &#39;_method&#39;, &#39;_peek_chunked&#39;, &#39;_read1_chunked&#39;, &#39;_read_and_discard_trailer&#39;, &#39;_read_next_chunk_size&#39;, &#39;_read_status&#39;, &#39;_readall_chunked&#39;, &#39;_readinto_chunked&#39;, &#39;_safe_read&#39;, &#39;_safe_readinto&#39;, &#39;begin&#39;, &#39;chunk_left&#39;, &#39;chunked&#39;, &#39;close&#39;, &#39;closed&#39;, &#39;code&#39;, &#39;debuglevel&#39;, &#39;detach&#39;, &#39;fileno&#39;, &#39;flush&#39;, &#39;fp&#39;, &#39;getcode&#39;, &#39;getheader&#39;, &#39;getheaders&#39;, &#39;geturl&#39;, &#39;headers&#39;, &#39;info&#39;, &#39;isatty&#39;, &#39;isclosed&#39;, &#39;length&#39;, &#39;msg&#39;, &#39;peek&#39;, &#39;read&#39;, &#39;read1&#39;, &#39;readable&#39;, &#39;readinto&#39;, &#39;readinto1&#39;, &#39;readline&#39;, &#39;readlines&#39;, &#39;reason&#39;, &#39;seek&#39;, &#39;seekable&#39;, &#39;status&#39;, &#39;tell&#39;, &#39;truncate&#39;, &#39;url&#39;, &#39;version&#39;, &#39;will_close&#39;, &#39;writable&#39;, &#39;write&#39;, &#39;writelines&#39;]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Всё, что есть в HTTP-сообщении.</p>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">msg</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">code</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Заголовки: </span><span class="se">\n</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">))</span>
+<span class="c1"># . . .</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>http://example.com/
+OK
+200
+Заголовки: 
+Age: 285516
+Cache-Control: max-age=604800
+Content-Type: text/html; charset=UTF-8
+Date: Wed, 15 Apr 2020 00:00:39 GMT
+Etag: &#34;3147526947+ident&#34;
+Expires: Wed, 22 Apr 2020 00:00:39 GMT
+Last-Modified: Thu, 17 Oct 2019 07:18:26 GMT
+Server: ECS (bsa/EB18)
+Vary: Accept-Encoding
+X-Cache: HIT
+Content-Length: 1256
+Connection: close
+
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="requests">requests<a class="anchor-link" href="#requests">&#182;</a></h3><p>HTTP for Humans</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://example.com&#39;</span><span class="p">)</span>
+<span class="n">response</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[19]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;Response [200]&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">dir</span><span class="p">(</span><span class="n">response</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[&#39;__attrs__&#39;, &#39;__bool__&#39;, &#39;__class__&#39;, &#39;__delattr__&#39;, &#39;__dict__&#39;, &#39;__dir__&#39;, &#39;__doc__&#39;, &#39;__enter__&#39;, &#39;__eq__&#39;, &#39;__exit__&#39;, &#39;__format__&#39;, &#39;__ge__&#39;, &#39;__getattribute__&#39;, &#39;__getstate__&#39;, &#39;__gt__&#39;, &#39;__hash__&#39;, &#39;__init__&#39;, &#39;__init_subclass__&#39;, &#39;__iter__&#39;, &#39;__le__&#39;, &#39;__lt__&#39;, &#39;__module__&#39;, &#39;__ne__&#39;, &#39;__new__&#39;, &#39;__nonzero__&#39;, &#39;__reduce__&#39;, &#39;__reduce_ex__&#39;, &#39;__repr__&#39;, &#39;__setattr__&#39;, &#39;__setstate__&#39;, &#39;__sizeof__&#39;, &#39;__str__&#39;, &#39;__subclasshook__&#39;, &#39;__weakref__&#39;, &#39;_content&#39;, &#39;_content_consumed&#39;, &#39;_next&#39;, &#39;apparent_encoding&#39;, &#39;close&#39;, &#39;connection&#39;, &#39;content&#39;, &#39;cookies&#39;, &#39;elapsed&#39;, &#39;encoding&#39;, &#39;headers&#39;, &#39;history&#39;, &#39;is_permanent_redirect&#39;, &#39;is_redirect&#39;, &#39;iter_content&#39;, &#39;iter_lines&#39;, &#39;json&#39;, &#39;links&#39;, &#39;next&#39;, &#39;ok&#39;, &#39;raise_for_status&#39;, &#39;raw&#39;, &#39;reason&#39;, &#39;request&#39;, &#39;status_code&#39;, &#39;text&#39;, &#39;url&#39;]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">connection</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">ok</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">encoding</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">links</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>http://example.com/
+&lt;requests.adapters.HTTPAdapter object at 0x7f0f71cba450&gt;
+{&#39;Content-Encoding&#39;: &#39;gzip&#39;, &#39;Accept-Ranges&#39;: &#39;bytes&#39;, &#39;Age&#39;: &#39;285573&#39;, &#39;Cache-Control&#39;: &#39;max-age=604800&#39;, &#39;Content-Type&#39;: &#39;text/html; charset=UTF-8&#39;, &#39;Date&#39;: &#39;Wed, 15 Apr 2020 00:01:36 GMT&#39;, &#39;Etag&#39;: &#39;&#34;3147526947+ident&#34;&#39;, &#39;Expires&#39;: &#39;Wed, 22 Apr 2020 00:01:36 GMT&#39;, &#39;Last-Modified&#39;: &#39;Thu, 17 Oct 2019 07:18:26 GMT&#39;, &#39;Server&#39;: &#39;ECS (bsa/EB18)&#39;, &#39;Vary&#39;: &#39;Accept-Encoding&#39;, &#39;X-Cache&#39;: &#39;HIT&#39;, &#39;Content-Length&#39;: &#39;648&#39;}
+True
+200
+UTF-8
+{}
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;!doctype html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Example Domain&lt;/title&gt;
+
+    &lt;meta charset=&#34;utf-8&#34; /&gt;
+    &lt;meta http-equiv=&#34;Content-type&#34; content=&#34;text/html; charset=utf-8&#34; /&gt;
+    &lt;meta name=&#34;viewport&#34; content=&#34;width=device-width, initial-scale=1&#34; /&gt;
+    &lt;style type=&#34;text/css&#34;&gt;
+    body {
+        background-color: #f0f0f2;
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, system-ui, BlinkMacSystemFont, &#34;Segoe UI&#34;, &#34;Open Sans&#34;, &#34;Helvetica Neue&#34;, Helvetica, Arial, sans-serif;
+        
+    }
+    div {
+        width: 600px;
+        margin: 5em auto;
+        padding: 2em;
+        background-color: #fdfdff;
+        border-radius: 0.5em;
+        box-shadow: 2px 3px 7px 2px rgba(0,0,0,0.02);
+    }
+    a:link, a:visited {
+        color: #38488f;
+        text-decoration: none;
+    }
+    @media (max-width: 700px) {
+        div {
+            margin: 0 auto;
+            width: auto;
+        }
+    }
+    &lt;/style&gt;    
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;div&gt;
+    &lt;h1&gt;Example Domain&lt;/h1&gt;
+    &lt;p&gt;This domain is for use in illustrative examples in documents. You may use this
+    domain in literature without prior coordination or asking for permission.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&#34;https://www.iana.org/domains/example&#34;&gt;More information...&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="socket-(low-level,-&#1077;&#1089;&#1083;&#1080;-&#1074;&#1072;&#1084;-&#1074;-&#1078;&#1080;&#1079;&#1085;&#1080;-&#1084;&#1072;&#1083;&#1086;-&#1072;&#1089;&#1089;&#1077;&#1084;&#1073;&#1083;&#1077;&#1088;&#1072;)">socket (low-level, &#1077;&#1089;&#1083;&#1080; &#1074;&#1072;&#1084; &#1074; &#1078;&#1080;&#1079;&#1085;&#1080; &#1084;&#1072;&#1083;&#1086; &#1072;&#1089;&#1089;&#1077;&#1084;&#1073;&#1083;&#1077;&#1088;&#1072;)<a class="anchor-link" href="#socket-(low-level,-&#1077;&#1089;&#1083;&#1080;-&#1074;&#1072;&#1084;-&#1074;-&#1078;&#1080;&#1079;&#1085;&#1080;-&#1084;&#1072;&#1083;&#1086;-&#1072;&#1089;&#1089;&#1077;&#1084;&#1073;&#1083;&#1077;&#1088;&#1072;)">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">socket</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sock</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+<span class="n">host</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">gethostbyname</span><span class="p">(</span><span class="s1">&#39;www.example.com&#39;</span><span class="p">)</span>
+<span class="n">port</span> <span class="o">=</span> <span class="mi">80</span>
+
+<span class="n">sock</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="n">host</span><span class="p">,</span><span class="n">port</span><span class="p">))</span>
+<span class="n">sock</span><span class="o">.</span><span class="n">sendall</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;GET / HTTP/1.1</span><span class="se">\r\n</span><span class="s1">Host: www.example.com</span><span class="se">\r\n\r\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">val</span> <span class="o">=</span> <span class="n">sock</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">4096</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>HTTP/1.1 200 OK
+Age: 469527
+Cache-Control: max-age=604800
+Content-Type: text/html; charset=UTF-8
+Date: Wed, 15 Apr 2020 00:01:59 GMT
+Etag: &#34;3147526947+ident&#34;
+Expires: Wed, 22 Apr 2020 00:01:59 GMT
+Last-Modified: Thu, 17 Oct 2019 07:18:26 GMT
+Server: ECS (bsa/EB15)
+Vary: Accept-Encoding
+X-Cache: HIT
+Content-Length: 1256
+
+&lt;!doctype html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Example Domain&lt;/title&gt;
+
+    &lt;meta charset=&#34;utf-8&#34; /&gt;
+    &lt;meta http-equiv=&#34;Content-type&#34; content=&#34;text/html; charset=utf-8&#34; /&gt;
+    &lt;meta name=&#34;viewport&#34; content=&#34;width=device-width, initial-scale=1&#34; /&gt;
+    &lt;style type=&#34;text/css&#34;&gt;
+    body {
+        background-color: #f0f0f2;
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, system-ui, BlinkMacSystemFont, &#34;Segoe UI&#34;, &#34;Open Sans&#34;, &#34;Helvetica Neue&#34;, Helvetica, Arial, sans-serif;
+        
+    }
+    div {
+        width: 600px;
+        margin: 5em auto;
+        padding: 2em;
+        background-color: #fdfdff;
+        border-radius: 0.5em;
+        box-shadow: 2px 3px 7px 2px rgba(0,0,0,0.02);
+    }
+    a:link, a:visited {
+        color: #38488f;
+        text-decoration: none;
+    }
+    @media (max-width: 700px) {
+        div {
+            margin: 0 auto;
+            width: auto;
+        }
+    }
+    &lt;/style&gt;    
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;div&gt;
+    &lt;h1&gt;Example Domain&lt;/h1&gt;
+    &lt;p&gt;This domain is for use in illustrative examples in documents. You may use this
+    domain in literature without prior coordination or asking for permission.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&#34;https://www.iana.org/domains/example&#34;&gt;More information...&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Split off the HTTP headers</span>
+<span class="n">val</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\r\n\r\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;!doctype html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Example Domain&lt;/title&gt;
+
+    &lt;meta charset=&#34;utf-8&#34; /&gt;
+    &lt;meta http-equiv=&#34;Content-type&#34; content=&#34;text/html; charset=utf-8&#34; /&gt;
+    &lt;meta name=&#34;viewport&#34; content=&#34;width=device-width, initial-scale=1&#34; /&gt;
+    &lt;style type=&#34;text/css&#34;&gt;
+    body {
+        background-color: #f0f0f2;
+        margin: 0;
+        padding: 0;
+        font-family: &#34;Open Sans&#34;, &#34;Helvetica Neue&#34;, Helvetica, Arial, sans-serif;
+        
+    }
+    div {
+        width: 600px;
+        margin: 5em auto;
+        padding: 50px;
+        background-color: #fff;
+        border-radius: 1em;
+    }
+    a:link, a:visited {
+        color: #38488f;
+        text-decoration: none;
+    }
+    @media (max-width: 700px) {
+        body {
+            background-color: #fff;
+        }
+        div {
+            width: auto;
+            margin: 0 auto;
+            border-radius: 0;
+            padding: 1em;
+        }
+    }
+    &lt;/style&gt;    
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;div&gt;
+    &lt;h1&gt;Example Domain&lt;/h1&gt;
+    &lt;p&gt;This domain is established to be used for illustrative examples in documents. You may use this
+    domain in examples without prior coordination or asking for permission.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&#34;http://www.iana.org/domains/example&#34;&gt;More information...&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#1055;&#1072;&#1088;&#1089;&#1080;&#1085;&#1075;-html">&#1055;&#1072;&#1088;&#1089;&#1080;&#1085;&#1075; html<a class="anchor-link" href="#&#1055;&#1072;&#1088;&#1089;&#1080;&#1085;&#1075;-html">&#182;</a></h2><p>Варианты инструментов:</p>
+<ul>
+<li>re</li>
+<li>lxml</li>
+<li>BeautifulSoup</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;example.com.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">html</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;!doctype html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Example Domain&lt;/title&gt;
+
+    &lt;meta charset=&#34;utf-8&#34; /&gt;
+    &lt;meta http-equiv=&#34;Content-type&#34; content=&#34;text/html; charset=utf-8&#34; /&gt;
+    &lt;meta name=&#34;viewport&#34; content=&#34;width=device-width, initial-scale=1&#34; /&gt;
+    &lt;style type=&#34;text/css&#34;&gt;
+    body {
+        background-color: #f0f0f2;
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, system-ui, BlinkMacSystemFont, &#34;Segoe UI&#34;, &#34;Open Sans&#34;, &#34;Helvetica Neue&#34;, Helvetica, Arial, sans-serif;
+        
+    }
+    div {
+        width: 600px;
+        margin: 5em auto;
+        padding: 2em;
+        background-color: #fdfdff;
+        border-radius: 0.5em;
+        box-shadow: 2px 3px 7px 2px rgba(0,0,0,0.02);
+    }
+    a:link, a:visited {
+        color: #38488f;
+        text-decoration: none;
+    }
+    @media (max-width: 700px) {
+        div {
+            margin: 0 auto;
+            width: auto;
+        }
+    }
+    &lt;/style&gt;    
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;div&gt;
+    &lt;h1&gt;Example Domain&lt;/h1&gt;
+    &lt;p&gt;This domain is for use in illustrative examples in documents. You may use this
+    domain in literature without prior coordination or asking for permission.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&#34;https://www.iana.org/domains/example&#34;&gt;More information...&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="re">re<a class="anchor-link" href="#re">&#182;</a></h3><p>Давайте забудем, что HTML -- дерево, и попробуем попарсить его, как строчку.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">h1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;&lt;h1&gt;[\w ]+&lt;/h1&gt;&#39;</span><span class="p">,</span> <span class="n">html</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">h1</span><span class="p">)</span>
+<span class="n">h1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;&lt;h1&gt;([\w ]+)&lt;/h1&gt;&#39;</span><span class="p">,</span> <span class="n">html</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">h1</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[&#39;&lt;h1&gt;Example Domain&lt;/h1&gt;&#39;]
+[&#39;Example Domain&#39;]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[41]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">paragraphs</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;&lt;p&gt;(.*)&lt;/p&gt;&#39;</span><span class="p">,</span> <span class="n">html</span><span class="p">)</span>
+<span class="n">paragraphs</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[41]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;&lt;a href=&#34;https://www.iana.org/domains/example&#34;&gt;More information...&lt;/a&gt;&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Там же 2 параграфа, почему не нашёлся второй?</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[43]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">paragraphs</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;&lt;p&gt;([\w\W]*)&lt;/p&gt;&#39;</span><span class="p">,</span> <span class="n">html</span><span class="p">)</span> 
+<span class="n">paragraphs</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[43]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;This domain is for use in illustrative examples in documents. You may use this\n    domain in literature without prior coordination or asking for permission.&lt;/p&gt;\n    &lt;p&gt;&lt;a href=&#34;https://www.iana.org/domains/example&#34;&gt;More information...&lt;/a&gt;&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Опять плохо..</p>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">paragraphs</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;&lt;p&gt;([\w\W]*?)&lt;/p&gt;&#39;</span><span class="p">,</span> <span class="n">html</span><span class="p">)</span> <span class="c1"># * - greedy; *? - lazy (non-greedy) </span>
+<span class="n">paragraphs</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[45]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;This domain is for use in illustrative examples in documents. You may use this\n    domain in literature without prior coordination or asking for permission.&#39;,
+ &#39;&lt;a href=&#34;https://www.iana.org/domains/example&#34;&gt;More information...&lt;/a&gt;&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Жесть, да?</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="lxml">lxml<a class="anchor-link" href="#lxml">&#182;</a></h3><p>Воспользуемся библиотекой, которая знает про структуру XML (и HTML).</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[64]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">etree</span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span><span class="p">,</span> <span class="n">BytesIO</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[65]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">parser</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">HTMLParser</span><span class="p">()</span>
+<span class="n">tree</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="n">html</span><span class="p">),</span> <span class="n">parser</span><span class="p">)</span>
+<span class="n">tree</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[65]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;lxml.etree._ElementTree at 0x7f0f71cae820&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div></section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[68]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">dir</span><span class="p">(</span><span class="n">tree</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[&#39;__class__&#39;, &#39;__copy__&#39;, &#39;__deepcopy__&#39;, &#39;__delattr__&#39;, &#39;__dir__&#39;, &#39;__doc__&#39;, &#39;__eq__&#39;, &#39;__format__&#39;, &#39;__ge__&#39;, &#39;__getattribute__&#39;, &#39;__gt__&#39;, &#39;__hash__&#39;, &#39;__init__&#39;, &#39;__init_subclass__&#39;, &#39;__le__&#39;, &#39;__lt__&#39;, &#39;__ne__&#39;, &#39;__new__&#39;, &#39;__pyx_vtable__&#39;, &#39;__reduce__&#39;, &#39;__reduce_ex__&#39;, &#39;__repr__&#39;, &#39;__setattr__&#39;, &#39;__sizeof__&#39;, &#39;__str__&#39;, &#39;__subclasshook__&#39;, &#39;_setroot&#39;, &#39;docinfo&#39;, &#39;find&#39;, &#39;findall&#39;, &#39;findtext&#39;, &#39;getelementpath&#39;, &#39;getiterator&#39;, &#39;getpath&#39;, &#39;getroot&#39;, &#39;iter&#39;, &#39;iterfind&#39;, &#39;parse&#39;, &#39;parser&#39;, &#39;relaxng&#39;, &#39;write&#39;, &#39;write_c14n&#39;, &#39;xinclude&#39;, &#39;xmlschema&#39;, &#39;xpath&#39;, &#39;xslt&#39;]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[88]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">getroot</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">getroot</span><span class="p">(),</span> <span class="n">pretty_print</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;html&#39;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;Element html at 0x7f0f72d80af0&gt;
+b&#39;&lt;html&gt;\n&lt;head&gt;\n    &lt;title&gt;Example Domain&lt;/title&gt;\n\n    &lt;meta charset=&#34;utf-8&#34;&gt;\n    &lt;meta http-equiv=&#34;Content-type&#34; content=&#34;text/html; charset=utf-8&#34;&gt;\n    &lt;meta name=&#34;viewport&#34; content=&#34;width=device-width, initial-scale=1&#34;&gt;\n    &lt;style type=&#34;text/css&#34;&gt;\n    body {\n        background-color: #f0f0f2;\n        margin: 0;\n        padding: 0;\n        font-family: -apple-system, system-ui, BlinkMacSystemFont, &#34;Segoe UI&#34;, &#34;Open Sans&#34;, &#34;Helvetica Neue&#34;, Helvetica, Arial, sans-serif;\n        \n    }\n    div {\n        width: 600px;\n        margin: 5em auto;\n        padding: 2em;\n        background-color: #fdfdff;\n        border-radius: 0.5em;\n        box-shadow: 2px 3px 7px 2px rgba(0,0,0,0.02);\n    }\n    a:link, a:visited {\n        color: #38488f;\n        text-decoration: none;\n    }\n    @media (max-width: 700px) {\n        div {\n            margin: 0 auto;\n            width: auto;\n        }\n    }\n    &lt;/style&gt;    \n&lt;/head&gt;\n\n&lt;body&gt;\n&lt;div&gt;\n    &lt;h1&gt;Example Domain&lt;/h1&gt;\n    &lt;p&gt;This domain is for use in illustrative examples in documents. You may use this\n    domain in literature without prior coordination or asking for permission.&lt;/p&gt;\n    &lt;p&gt;&lt;a href=&#34;https://www.iana.org/domains/example&#34;&gt;More information...&lt;/a&gt;&lt;/p&gt;\n&lt;/div&gt;\n&lt;/body&gt;\n&lt;/html&gt;\n&#39;
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[89]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">paragraphs</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;//p&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">paragraphs</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>  
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>This domain is for use in illustrative examples in documents. You may use this
+    domain in literature without prior coordination or asking for permission.
+None
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[90]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">paragraphs</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">pretty_print</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;html&#39;</span><span class="p">))</span>  
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>b&#39;&lt;p&gt;This domain is for use in illustrative examples in documents. You may use this\n    domain in literature without prior coordination or asking for permission.&lt;/p&gt;\n    \n&#39;
+b&#39;&lt;p&gt;&lt;a href=&#34;https://www.iana.org/domains/example&#34;&gt;More information...&lt;/a&gt;&lt;/p&gt;\n\n&#39;
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[91]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hrefs</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;//a&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">href</span> <span class="ow">in</span> <span class="n">hrefs</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">href</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>  
+    <span class="nb">print</span><span class="p">(</span><span class="n">href</span><span class="o">.</span><span class="n">attrib</span><span class="p">)</span>  
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>More information...
+{&#39;href&#39;: &#39;https://www.iana.org/domains/example&#39;}
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[95]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">specific_hrefs</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;//a[@href=&quot;https://www.iana.org/domains/example&quot;]&#39;</span><span class="p">)</span>
+<span class="n">specific_hrefs</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[95]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&lt;Element a at 0x7f0f71c268c0&gt;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="BeautifulSoup">BeautifulSoup<a class="anchor-link" href="#BeautifulSoup">&#182;</a></h3><p>Ещё один вариант, который хорошо подходит для парсинга HTML.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[96]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># try:</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="c1"># except:</span>
+<span class="c1">#     !pip install bs4 </span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[97]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s1">&#39;lxml&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[98]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">paragraphs</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
+<span class="n">paragraphs</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[98]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&lt;p&gt;This domain is for use in illustrative examples in documents. You may use this
+     domain in literature without prior coordination or asking for permission.&lt;/p&gt;,
+ &lt;p&gt;&lt;a href=&#34;https://www.iana.org/domains/example&#34;&gt;More information...&lt;/a&gt;&lt;/p&gt;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div></section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[99]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hrefs</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+<span class="n">hrefs</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[99]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&lt;a href=&#34;https://www.iana.org/domains/example&#34;&gt;More information...&lt;/a&gt;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[101]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hrefs</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;https://www.iana.org/domains/example&#39;</span><span class="p">)</span>
+<span class="n">hrefs</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[101]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&lt;a href=&#34;https://www.iana.org/domains/example&#34;&gt;More information...&lt;/a&gt;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[104]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hrefs</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;https://www.other-website.org/domains/example&#39;</span><span class="p">)</span>
+<span class="n">hrefs</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[104]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Performance">Performance<a class="anchor-link" href="#Performance">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[105]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">timeit</span> re.findall(r&#39;&lt;p&gt;([\w\W]*?)&lt;/p&gt;&#39;, html)
+<span class="o">%</span><span class="k">timeit</span> tree.xpath(&#39;//p&#39;)
+<span class="o">%</span><span class="k">timeit</span> soup.find_all(&#39;p&#39;)
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>18.6 µs ± 204 ns per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+35.3 µs ± 522 ns per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+37.9 µs ± 405 ns per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Мораль: regex -- это быстро.</p>
+<p>BeautifulSoup чуть дольше lxml, т.к. он для удобства работы преобразует документ в некий внутренний формат -- собственно, суп.</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#1045;&#1089;&#1083;&#1080;-&#1086;&#1089;&#1090;&#1072;&#1083;&#1086;&#1089;&#1100;-&#1074;&#1088;&#1077;&#1084;&#1103;-&#1080;-&#1093;&#1086;&#1095;&#1077;&#1090;&#1089;&#1103;-&#1089;&#1086;&#1074;&#1089;&#1077;&#1084;-&#1078;&#1080;&#1074;&#1086;&#1081;-&#1087;&#1088;&#1072;&#1082;&#1090;&#1080;&#1082;&#1080;:-scrapy">&#1045;&#1089;&#1083;&#1080; &#1086;&#1089;&#1090;&#1072;&#1083;&#1086;&#1089;&#1100; &#1074;&#1088;&#1077;&#1084;&#1103; &#1080; &#1093;&#1086;&#1095;&#1077;&#1090;&#1089;&#1103; &#1089;&#1086;&#1074;&#1089;&#1077;&#1084; &#1078;&#1080;&#1074;&#1086;&#1081; &#1087;&#1088;&#1072;&#1082;&#1090;&#1080;&#1082;&#1080;: scrapy<a class="anchor-link" href="#&#1045;&#1089;&#1083;&#1080;-&#1086;&#1089;&#1090;&#1072;&#1083;&#1086;&#1089;&#1100;-&#1074;&#1088;&#1077;&#1084;&#1103;-&#1080;-&#1093;&#1086;&#1095;&#1077;&#1090;&#1089;&#1103;-&#1089;&#1086;&#1074;&#1089;&#1077;&#1084;-&#1078;&#1080;&#1074;&#1086;&#1081;-&#1087;&#1088;&#1072;&#1082;&#1090;&#1080;&#1082;&#1080;:-scrapy">&#182;</a></h2><p>Нужно минут 5-10, в зависимости от качества интернета.</p>
+<p>А заодно попрактикуемся в ipython magic!</p>
+<p>Будем парсить сайт с архивом курсов криптовалют: <a href="https://coinmarketcap.com/">https://coinmarketcap.com/</a>.</p>
+<p>Хочется открыть <a href="https://coinmarketcap.com/historical/">historical snapshots</a> и для каждой недели выгрузить полную табличку.</p>
+<h3 id="&#1042;&#1072;&#1078;&#1085;&#1086;!">&#1042;&#1072;&#1078;&#1085;&#1086;!<a class="anchor-link" href="#&#1042;&#1072;&#1078;&#1085;&#1086;!">&#182;</a></h3><p>Совершенно не обязательно понимать, что будет происходить дальше.</p>
+<p>Мораль: есть фреймворки, которые полностью берут на себя получение и парсинг HTML.</p>
+<p>А ещё они умеют распараллеливать процесс, вставлять случайные задержки (чтобы серверы не подумали, что вы робот и не заблокировали ваши запросы) и удобно экспортировать полученные данные (например, в базу данных). И многое другое. <br>И всё это контролируется <code>scrapy.cfg</code> -- одним конфигурационным файлом.</p>
+<p>Вам остаётся только указать, какие куски текста надо выцеплять. И в какую базу класть. Ну, почти. :)</p>
 
 </div>
 </div>
 </div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">scrapy</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="o">!</span>pip install scrapy
+</pre></div>
 
-<span class="k">assert</span> <span class="nb">sum</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="o">==</span> <span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;Should be 6&quot;</span>
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>rm -rf coinmarketcap
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>scrapy startproject coinmarketcap
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>New Scrapy project &#39;coinmarketcap&#39;, using template directory &#39;/usr/local/lib/python3.8/dist-packages/scrapy/templates/project&#39;, created in:
+    /home/baulin/Desktop/FIVTPython21spring/mipt-python-21spring/Seminar8/coinmarketcap
+
+You can start your first spider with:
+    cd coinmarketcap
+    scrapy genspider example example.com
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Что там внутри?</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="nb">cd</span> coinmarketcap<span class="p">;</span> ls -R
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>.:
+coinmarketcap  scrapy.cfg
+
+./coinmarketcap:
+__init__.py  items.py  middlewares.py  pipelines.py  settings.py  spiders
+
+./coinmarketcap/spiders:
+__init__.py
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Специальная функция, чтобы из ноутбука формировать код в проекте scrapy:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">dump_to</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">_i</span><span class="p">)</span>  <span class="c1"># _i это &quot;последний выполненный Input&quot; в iPython</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="&#1042;&#1085;&#1080;&#1084;&#1072;&#1085;&#1080;&#1077;!">&#1042;&#1085;&#1080;&#1084;&#1072;&#1085;&#1080;&#1077;!<a class="anchor-link" href="#&#1042;&#1085;&#1080;&#1084;&#1072;&#1085;&#1080;&#1077;!">&#182;</a></h3><p>Следующие ячейки не будут выполняться. <br>Мы просто помещаем код в Input, а потом перекладываем его в нужный файл.</p>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Item:-c&#1087;&#1077;&#1088;&#1074;&#1072;-&#1086;&#1087;&#1088;&#1077;&#1076;&#1077;&#1083;&#1080;&#1084;,-&#1095;&#1090;&#1086;-&#1093;&#1086;&#1090;&#1080;&#1084;-&#1089;&#1086;&#1073;&#1080;&#1088;&#1072;&#1090;&#1100;">Item: c&#1087;&#1077;&#1088;&#1074;&#1072; &#1086;&#1087;&#1088;&#1077;&#1076;&#1077;&#1083;&#1080;&#1084;, &#1095;&#1090;&#1086; &#1093;&#1086;&#1090;&#1080;&#1084; &#1089;&#1086;&#1073;&#1080;&#1088;&#1072;&#1090;&#1100;<a class="anchor-link" href="#Item:-c&#1087;&#1077;&#1088;&#1074;&#1072;-&#1086;&#1087;&#1088;&#1077;&#1076;&#1077;&#1083;&#1080;&#1084;,-&#1095;&#1090;&#1086;-&#1093;&#1086;&#1090;&#1080;&#1084;-&#1089;&#1086;&#1073;&#1080;&#1088;&#1072;&#1090;&#1100;">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># -*- coding:utf8 -*-</span>
+
+<span class="kn">import</span> <span class="nn">scrapy</span>
+
+
+<span class="k">class</span> <span class="nc">CurrencyItem</span><span class="p">(</span><span class="n">scrapy</span><span class="o">.</span><span class="n">Item</span><span class="p">):</span>
+    <span class="n">date</span> <span class="o">=</span> <span class="n">scrapy</span><span class="o">.</span><span class="n">Field</span><span class="p">()</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">scrapy</span><span class="o">.</span><span class="n">Field</span><span class="p">()</span>
+    <span class="n">symbol</span> <span class="o">=</span> <span class="n">scrapy</span><span class="o">.</span><span class="n">Field</span><span class="p">()</span>
+    <span class="n">market_cap</span> <span class="o">=</span> <span class="n">scrapy</span><span class="o">.</span><span class="n">Field</span><span class="p">()</span>
+    <span class="n">price</span> <span class="o">=</span> <span class="n">scrapy</span><span class="o">.</span><span class="n">Field</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dump_to</span><span class="p">(</span><span class="s1">&#39;./coinmarketcap/coinmarketcap/items.py&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Spider:-&#1090;&#1086;&#1090;,-&#1082;&#1090;&#1086;-&#1089;&#1086;&#1073;&#1080;&#1088;&#1072;&#1077;&#1090;-Item'&#1099;">Spider: &#1090;&#1086;&#1090;, &#1082;&#1090;&#1086; &#1089;&#1086;&#1073;&#1080;&#1088;&#1072;&#1077;&#1090; Item'&#1099;<a class="anchor-link" href="#Spider:-&#1090;&#1086;&#1090;,-&#1082;&#1090;&#1086;-&#1089;&#1086;&#1073;&#1080;&#1088;&#1072;&#1077;&#1090;-Item'&#1099;">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># -*- coding:utf8 -*-</span>
+
+<span class="kn">from</span> <span class="nn">scrapy</span> <span class="kn">import</span> <span class="n">Request</span>
+<span class="kn">from</span> <span class="nn">scrapy.spiders</span> <span class="kn">import</span> <span class="n">CrawlSpider</span><span class="p">,</span> <span class="n">Rule</span>
+<span class="kn">from</span> <span class="nn">scrapy.linkextractors</span> <span class="kn">import</span> <span class="n">LinkExtractor</span>
+<span class="kn">from</span> <span class="nn">scrapy.loader.processors</span> <span class="kn">import</span> <span class="n">Join</span>
+<span class="kn">from</span> <span class="nn">scrapy.loader</span> <span class="kn">import</span> <span class="n">ItemLoader</span>
+<span class="kn">from</span> <span class="nn">scrapy.selector</span> <span class="kn">import</span> <span class="n">Selector</span>
+<span class="kn">from</span> <span class="nn">coinmarketcap.items</span> <span class="kn">import</span> <span class="n">CurrencyItem</span>
+
+<span class="k">class</span> <span class="nc">CurrencyLoader</span><span class="p">(</span><span class="n">ItemLoader</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">WeeklySpider</span><span class="p">(</span><span class="n">CrawlSpider</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;weekly&#39;</span>
+    <span class="n">allowed_domains</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;coinmarketcap.com&#39;</span><span class="p">]</span>
+    <span class="n">start_urls</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;https://coinmarketcap.com/historical/&#39;</span><span class="p">]</span>
+    <span class="n">only_2018_april_regex</span> <span class="o">=</span> <span class="s1">&#39;/201904[0-9]</span><span class="si">{2}</span><span class="s1">&#39;</span> <span class="c1"># full history parsing takes ~4 hrs </span>
+
+    <span class="n">rules</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">Rule</span><span class="p">(</span><span class="n">LinkExtractor</span><span class="p">(</span><span class="n">allow</span><span class="o">=</span><span class="p">(</span><span class="n">only_2018_april_regex</span><span class="p">,</span> <span class="p">)),</span> <span class="n">callback</span><span class="o">=</span><span class="s1">&#39;parse_weekly_report&#39;</span><span class="p">,</span> <span class="n">follow</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">parse_weekly_report</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+        
+        <span class="n">hxs</span> <span class="o">=</span> <span class="n">Selector</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+        <span class="n">items_html</span> <span class="o">=</span> <span class="n">hxs</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;//table//tr&#39;</span><span class="p">)</span>
+        <span class="c1">#print(len(items_html),type(items_html),dir(items_html))</span>
+        <span class="c1">#print(items_html)</span>
+        <span class="n">items</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="n">item_names</span> <span class="o">=</span> <span class="n">items_html</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;//td[@class=&quot;cmc-table__cell cmc-table__cell--sticky cmc-table__cell--sortable cmc-table__cell--left cmc-table__cell--sort-by__name&quot;]//div//a/text()&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">extract</span><span class="p">()</span>
+        <span class="n">item_symbols</span> <span class="o">=</span> <span class="n">items_html</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;//td[@class=&quot;cmc-table__cell cmc-table__cell--sortable cmc-table__cell--left cmc-table__cell--sort-by__symbol&quot;]//div/text()&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">extract</span><span class="p">()</span>
+        <span class="n">item_caps</span> <span class="o">=</span> <span class="n">items_html</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;//td[@class=&quot;cmc-table__cell cmc-table__cell--sortable cmc-table__cell--right cmc-table__cell--sort-by__market-cap&quot;]//p/text()&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">extract</span><span class="p">()</span>
+        <span class="n">item_prices</span> <span class="o">=</span> <span class="n">items_html</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;//td[@class=&quot;cmc-table__cell cmc-table__cell--sortable cmc-table__cell--right cmc-table__cell--sort-by__price&quot;]//a/text()&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">extract</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+        <span class="c1">#print(len(item_prices),item_prices)</span>
+        
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">200</span><span class="p">):</span>
+
+            <span class="n">item</span> <span class="o">=</span> <span class="n">CurrencyItem</span><span class="p">()</span>
+            <span class="n">item</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">url</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">item</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">item_names</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">item</span><span class="p">[</span><span class="s1">&#39;symbol&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">item_symbols</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">item</span><span class="p">[</span><span class="s1">&#39;market_cap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">item_caps</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">item</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">item_prices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+            <span class="k">yield</span> <span class="n">item</span>
+          
 </pre></div>
 
     </div>
@@ -13233,61 +15247,140 @@ a.anchor-link {
 <div class="output_subarea output_text output_error">
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">AssertionError</span>                            Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-2-1e1741302eed&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-intense-fg ansi-bold">      1</span> nums <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">2</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">4</span><span class="ansi-blue-fg">]</span>
-<span class="ansi-green-intense-fg ansi-bold">      2</span> 
-<span class="ansi-green-fg">----&gt; 3</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">assert</span> sum<span class="ansi-blue-fg">(</span>nums<span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">==</span> <span class="ansi-cyan-fg">6</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#34;Should be 6&#34;</span>
+<span class="ansi-red-fg">ModuleNotFoundError</span>                       Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-10-6a28bcf6e4ad&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">      7</span> <span class="ansi-green-fg">from</span> scrapy<span class="ansi-blue-fg">.</span>loader <span class="ansi-green-fg">import</span> ItemLoader
+<span class="ansi-green-intense-fg ansi-bold">      8</span> <span class="ansi-green-fg">from</span> scrapy<span class="ansi-blue-fg">.</span>selector <span class="ansi-green-fg">import</span> Selector
+<span class="ansi-green-fg">----&gt; 9</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">from</span> coinmarketcap<span class="ansi-blue-fg">.</span>items <span class="ansi-green-fg">import</span> CurrencyItem
+<span class="ansi-green-intense-fg ansi-bold">     10</span> 
+<span class="ansi-green-intense-fg ansi-bold">     11</span> <span class="ansi-green-fg">class</span> CurrencyLoader<span class="ansi-blue-fg">(</span>ItemLoader<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
 
-<span class="ansi-red-fg">AssertionError</span>: Should be 6</pre>
+<span class="ansi-red-fg">ModuleNotFoundError</span>: No module named &#39;coinmarketcap.items&#39;</pre>
 </div>
 </div>
 
 </div>
 </div>
 
-</div></section></section><section><section>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dump_to</span><span class="p">(</span><span class="s1">&#39;./coinmarketcap/coinmarketcap/spiders/weekly.py&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div></section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>В Python встроен модуль <strong>unittest</strong>, который поддерживает автоматизацию тестов, использование общего кода для настройки и завершения тестов, объединение тестов в группы, а также позволяет отделять тесты от фреймворка для вывода информации.</p>
-<p>Для автоматизации тестов, unittest поддерживает некоторые важные концепции:</p>
-<p><strong>Испытательный стенд (test fixture)</strong> - выполняется подготовка, необходимая для выполнения тестов и все необходимые действия для очистки после выполнения тестов. Это может включать, например, создание временных баз данных или запуск серверного процесса.</p>
-<p><strong>Тестовый случай (test case)</strong> - минимальный блок тестирования. Он проверяет ответы для разных наборов данных. Модуль unittest предоставляет базовый класс <strong>TestCase</strong>, который можно использовать для создания новых тестовых случаев.</p>
-<p><strong>Набор тестов (test suite)</strong> - несколько тестовых случаев, наборов тестов или и того и другого. Он используется для объединения тестов, которые должны быть выполнены вместе.</p>
-<p><strong>Исполнитель тестов (test runner)</strong> - компонент, который управляет выполнением тестов и предоставляет пользователю результат. Исполнитель может использовать графический или текстовый интерфейс или возвращать специальное значение, которое сообщает о результатах выполнения тестов.</p>
+<h3 id="Pipeline:-&#1085;&#1072;&#1087;&#1088;&#1080;&#1084;&#1077;&#1088;,-&#1101;&#1082;&#1089;&#1087;&#1086;&#1088;&#1090;-&#1074;-&#1041;&#1044;">Pipeline: &#1085;&#1072;&#1087;&#1088;&#1080;&#1084;&#1077;&#1088;, &#1101;&#1082;&#1089;&#1087;&#1086;&#1088;&#1090; &#1074; &#1041;&#1044;<a class="anchor-link" href="#Pipeline:-&#1085;&#1072;&#1087;&#1088;&#1080;&#1084;&#1077;&#1088;,-&#1101;&#1082;&#1089;&#1087;&#1086;&#1088;&#1090;-&#1074;-&#1041;&#1044;">&#182;</a></h3><p>Не бойтесь, про это будет отдельный семинар! (начиная с учебного года 2019-2020 - можно бояться)</p>
 
 </div>
 </div>
-</div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Простой пример проверки работы строковых методов</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="kn">import</span> <span class="nn">unittest</span>
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.ext.declarative</span> <span class="kn">import</span> <span class="n">declarative_base</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span><span class="p">,</span> <span class="n">Table</span><span class="p">,</span> <span class="n">Column</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">String</span><span class="p">,</span> <span class="n">Date</span><span class="p">,</span> <span class="n">MetaData</span><span class="p">,</span> <span class="n">ForeignKey</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.engine.url</span> <span class="kn">import</span> <span class="n">URL</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">sessionmaker</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.pool</span> <span class="kn">import</span> <span class="n">NullPool</span>
+<span class="kn">from</span> <span class="nn">scrapy.exceptions</span> <span class="kn">import</span> <span class="n">DropItem</span>
+<span class="kn">from</span> <span class="nn">scrapy</span> <span class="kn">import</span> <span class="n">signals</span>
+<span class="kn">from</span> <span class="nn">coinmarketcap.items</span> <span class="kn">import</span> <span class="n">CurrencyItem</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
 
-<span class="k">class</span> <span class="nc">TestStringMethods</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="c1"># тестовые методы должны начинаться с test</span>
-    <span class="k">def</span> <span class="nf">test_upper</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span> <span class="s1">&#39;FOO&#39;</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">test_isupper</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="s1">&#39;FOO&#39;</span><span class="o">.</span><span class="n">isupper</span><span class="p">())</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="s1">&#39;Foo&#39;</span><span class="o">.</span><span class="n">isupper</span><span class="p">())</span>
+<span class="n">DeclarativeBase</span> <span class="o">=</span> <span class="n">declarative_base</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">test_split</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;hello world&#39;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span> <span class="p">[</span><span class="s1">&#39;hello&#39;</span><span class="p">,</span> <span class="s1">&#39;world&#39;</span><span class="p">])</span>
-        <span class="c1"># Проверим, что s.split не работает, если разделитель - не строка</span>
-        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
-            <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Currency</span><span class="p">(</span><span class="n">DeclarativeBase</span><span class="p">):</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s1">&#39;currency&#39;</span>
+    <span class="n">__table_args__</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;sqlite_autoincrement&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    
-    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">date</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="n">Date</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="n">String</span><span class="p">)</span>
+    <span class="n">symbol</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="s1">&#39;symbol&#39;</span><span class="p">,</span> <span class="n">String</span><span class="p">)</span>
+    <span class="n">market_cap</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="s1">&#39;market_cap&#39;</span><span class="p">,</span> <span class="n">String</span><span class="p">)</span>
+    <span class="n">price</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="s1">&#39;price&#39;</span><span class="p">,</span> <span class="n">String</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">symbol</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;symbol&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">market_cap</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;market_cap&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">price</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;&lt;Currency(</span><span class="si">{0}</span><span class="s2">, </span><span class="si">{1}</span><span class="s2">, </span><span class="si">{2}</span><span class="s2">)&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">symbol</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">market_cap</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">SqlitePipeline</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">settings</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">database</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;DATABASE&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sessions</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_crawler</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">crawler</span><span class="p">):</span>
+        <span class="n">pipeline</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">crawler</span><span class="o">.</span><span class="n">settings</span><span class="p">)</span>
+        <span class="n">crawler</span><span class="o">.</span><span class="n">signals</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">pipeline</span><span class="o">.</span><span class="n">spider_closed</span><span class="p">,</span> <span class="n">signals</span><span class="o">.</span><span class="n">spider_closed</span><span class="p">)</span>
+        <span class="n">crawler</span><span class="o">.</span><span class="n">signals</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">pipeline</span><span class="o">.</span><span class="n">spider_opened</span><span class="p">,</span> <span class="n">signals</span><span class="o">.</span><span class="n">spider_opened</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">pipeline</span>
+
+    <span class="k">def</span> <span class="nf">create_engine</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">URL</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">database</span><span class="p">),</span> <span class="n">poolclass</span><span class="o">=</span><span class="n">NullPool</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">engine</span>
+
+    <span class="k">def</span> <span class="nf">create_tables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">engine</span><span class="p">):</span>
+        <span class="n">DeclarativeBase</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">create_all</span><span class="p">(</span><span class="n">engine</span><span class="p">,</span> <span class="n">checkfirst</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">create_session</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">engine</span><span class="p">):</span>
+        <span class="n">session</span> <span class="o">=</span> <span class="n">sessionmaker</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="n">engine</span><span class="p">)()</span>
+        <span class="k">return</span> <span class="n">session</span>
+
+    <span class="k">def</span> <span class="nf">spider_opened</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spider</span><span class="p">):</span>
+        <span class="n">engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_engine</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_tables</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
+        <span class="n">session</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_session</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sessions</span><span class="p">[</span><span class="n">spider</span><span class="p">]</span> <span class="o">=</span> <span class="n">session</span>
+
+    <span class="k">def</span> <span class="nf">spider_closed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spider</span><span class="p">):</span>
+        <span class="n">session</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sessions</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">spider</span><span class="p">)</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">process_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">spider</span><span class="p">):</span>
+        <span class="n">session</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sessions</span><span class="p">[</span><span class="n">spider</span><span class="p">]</span>
+        <span class="n">currency</span> <span class="o">=</span> <span class="n">Currency</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="n">link_exists</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Currency</span><span class="p">)</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;symbol&#39;</span><span class="p">],</span> <span class="n">date</span><span class="o">=</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">first</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        
+        <span class="k">if</span> <span class="n">link_exists</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Item </span><span class="si">{}</span><span class="s1"> is in db&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">currency</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">item</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">currency</span><span class="p">)</span>
+            <span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Item </span><span class="si">{}</span><span class="s1"> stored in db&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">currency</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Failed to add </span><span class="si">{}</span><span class="s1"> to db&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">currency</span><span class="p">))</span>
+            <span class="n">session</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+            <span class="k">raise</span> <span class="n">e</span>
+
+        <span class="k">return</span> <span class="n">item</span>
 </pre></div>
 
     </div>
@@ -13297,26 +15390,6 @@ a.anchor-link {
 <div class="output_wrapper">
 <div class="output">
 
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>E
-======================================================================
-ERROR: /home/baulin/ (unittest.loader._FailedTest)
-----------------------------------------------------------------------
-AttributeError: module &#39;__main__&#39; has no attribute &#39;/home/baulin/&#39;
-
-----------------------------------------------------------------------
-Ran 1 test in 0.002s
-
-FAILED (errors=1)
-</pre>
-</div>
-</div>
 
 <div class="output_area">
 
@@ -13325,435 +15398,32 @@ FAILED (errors=1)
 
 <div class="output_subarea output_text output_error">
 <pre>
-An exception has occurred, use %tb to see the full traceback.
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ModuleNotFoundError</span>                       Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-12-41997e59d35e&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">      9</span> <span class="ansi-green-fg">from</span> scrapy<span class="ansi-blue-fg">.</span>exceptions <span class="ansi-green-fg">import</span> DropItem
+<span class="ansi-green-intense-fg ansi-bold">     10</span> <span class="ansi-green-fg">from</span> scrapy <span class="ansi-green-fg">import</span> signals
+<span class="ansi-green-fg">---&gt; 11</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">from</span> coinmarketcap<span class="ansi-blue-fg">.</span>items <span class="ansi-green-fg">import</span> CurrencyItem
+<span class="ansi-green-intense-fg ansi-bold">     12</span> <span class="ansi-green-fg">import</span> pandas <span class="ansi-green-fg">as</span> pd
+<span class="ansi-green-intense-fg ansi-bold">     13</span> <span class="ansi-green-fg">from</span> collections <span class="ansi-green-fg">import</span> Counter
 
-<span class="ansi-red-fg">SystemExit</span><span class="ansi-red-fg">:</span> True
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/usr/local/lib/python3.8/dist-packages/IPython/core/interactiveshell.py:3339: UserWarning: To exit: use &#39;exit&#39;, &#39;quit&#39;, or Ctrl-D.
-  warn(&#34;To exit: use &#39;exit&#39;, &#39;quit&#39;, or Ctrl-D.&#34;, stacklevel=1)
-</pre>
+<span class="ansi-red-fg">ModuleNotFoundError</span>: No module named &#39;coinmarketcap.items&#39;</pre>
 </div>
 </div>
 
 </div>
 </div>
 
-</div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Сохраним код на будущее</span>
-
-<span class="k">def</span> <span class="nf">dump_to</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">_i</span><span class="p">)</span>  <span class="c1"># _i это &quot;последний выполненный Input&quot; в iPython</span>
-        
-<span class="n">dump_to</span><span class="p">(</span><span class="s1">&#39;strings.py&#39;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="&#1059;&#1087;&#1089;..-&#1055;&#1086;&#1076;&#1088;&#1091;&#1078;&#1080;&#1084;-unittest-&#1089;-jupyter-notebook:">&#1059;&#1087;&#1089;.. &#1055;&#1086;&#1076;&#1088;&#1091;&#1078;&#1080;&#1084; unittest &#1089; jupyter notebook:<a class="anchor-link" href="#&#1059;&#1087;&#1089;..-&#1055;&#1086;&#1076;&#1088;&#1091;&#1078;&#1080;&#1084;-unittest-&#1089;-jupyter-notebook:">&#182;</a></h2><p>Q: А что случилось?</p>
-<p>A: The reason is that unittest.main looks at sys.argv and first parameter is what started IPython or Jupyter, therefore the error about kernel connection file not being a valid attribute. Passing explicit list to unittest.main will prevent IPython and Jupyter look at sys.argv. Passing exit=False will prevent unittest.main to shutdown the kernell process</p>
-
-</div>
-</div>
-</div></div></section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Простой пример проверки работы строковых методов</span>
-
-<span class="k">class</span> <span class="nc">TestStringMethods</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="c1"># тестовые методы должны начинаться с test</span>
-    <span class="k">def</span> <span class="nf">test_upper</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span> <span class="s1">&#39;FOO&#39;</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">test_isupper</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="s1">&#39;FOO&#39;</span><span class="o">.</span><span class="n">isupper</span><span class="p">())</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="s1">&#39;Foo&#39;</span><span class="o">.</span><span class="n">isupper</span><span class="p">())</span>
-
-    <span class="k">def</span> <span class="nf">test_split</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;hello world&#39;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span> <span class="p">[</span><span class="s1">&#39;hello&#39;</span><span class="p">,</span> <span class="s1">&#39;world&#39;</span><span class="p">])</span>
-        <span class="c1"># Проверим, что s.split не работает, если разделитель - не строка</span>
-        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
-            <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-
-    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;first-arg-is-ignored&#39;</span><span class="p">],</span> <span class="n">exit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>...
-----------------------------------------------------------------------
-Ran 3 tests in 0.007s
-
-OK
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[5]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&lt;unittest.main.TestProgram at 0x7f2d0c62ca60&gt;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="&#1048;&#1085;&#1090;&#1077;&#1088;&#1092;&#1077;&#1081;&#1089;-&#1082;&#1086;&#1084;&#1072;&#1085;&#1076;&#1085;&#1086;&#1081;-&#1089;&#1090;&#1088;&#1086;&#1082;&#1080;">&#1048;&#1085;&#1090;&#1077;&#1088;&#1092;&#1077;&#1081;&#1089; &#1082;&#1086;&#1084;&#1072;&#1085;&#1076;&#1085;&#1086;&#1081; &#1089;&#1090;&#1088;&#1086;&#1082;&#1080;<a class="anchor-link" href="#&#1048;&#1085;&#1090;&#1077;&#1088;&#1092;&#1077;&#1081;&#1089;-&#1082;&#1086;&#1084;&#1072;&#1085;&#1076;&#1085;&#1086;&#1081;-&#1089;&#1090;&#1088;&#1086;&#1082;&#1080;">&#182;</a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>python3 -m unittest strings                               # модуль
-<span class="o">!</span>python3 -m unittest strings.TestStringMethods             # класс
-<span class="o">!</span>python3 -m unittest strings.TestStringMethods.test_split  # метод
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>...
-----------------------------------------------------------------------
-Ran 3 tests in 0.001s
-
-OK
-...
-----------------------------------------------------------------------
-Ran 3 tests in 0.000s
-
-OK
-.
-----------------------------------------------------------------------
-Ran 1 test in 0.000s
-
-OK
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div></section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#С помощью флага -v можно получить более детальный отчёт:</span>
-<span class="o">!</span>python3 -m unittest -v strings
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>test_isupper (strings.TestStringMethods) ... ok
-test_split (strings.TestStringMethods) ... ok
-test_upper (strings.TestStringMethods) ... ok
-
-----------------------------------------------------------------------
-Ran 3 tests in 0.001s
-
-OK
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div></section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="&#1045;&#1097;&#1105;-&#1092;&#1083;&#1072;&#1075;&#1080;:">&#1045;&#1097;&#1105; &#1092;&#1083;&#1072;&#1075;&#1080;:<a class="anchor-link" href="#&#1045;&#1097;&#1105;-&#1092;&#1083;&#1072;&#1075;&#1080;:">&#182;</a></h2><p>-b (--buffer) - вывод программы при провале теста будет показан, а не скрыт, как обычно.</p>
-<p>-c (--catch) - Ctrl+C во время выполнения теста ожидает завершения текущего теста и затем сообщает результаты на данный момент. Второе нажатие Ctrl+C вызывает обычное исключение KeyboardInterrupt.</p>
-<p>-f (--failfast) - выход после первого же неудачного теста.</p>
-<p>--locals (начиная с Python 3.5) - показывать локальные переменные для провалившихся тестов.</p>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="&#1054;&#1073;&#1085;&#1072;&#1088;&#1091;&#1078;&#1077;&#1085;&#1080;&#1077;-&#1090;&#1077;&#1089;&#1090;&#1086;&#1074;">&#1054;&#1073;&#1085;&#1072;&#1088;&#1091;&#1078;&#1077;&#1085;&#1080;&#1077; &#1090;&#1077;&#1089;&#1090;&#1086;&#1074;<a class="anchor-link" href="#&#1054;&#1073;&#1085;&#1072;&#1088;&#1091;&#1078;&#1077;&#1085;&#1080;&#1077;-&#1090;&#1077;&#1089;&#1090;&#1086;&#1074;">&#182;</a></h2><p>unittest поддерживает простое обнаружение тестов. Для совместимости с обнаружением тестов, все файлы тестов должны быть модулями или пакетами, импортируемыми из директории верхнего уровня проекта (<a href="https://pythonworld.ru/osnovy/rabota-s-modulyami-sozdanie-podklyuchenie-instrukciyami-import-i-from.html#id3">см. подробнее о правилах наименования модулей</a>).</p>
-<p>Обнаружение тестов реализовано в TestLoader.discover(), но может быть использовано из командной строки:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>mv strings.py test_strings.py  #чтобы сработало переименуем модуль в test....py
-<span class="o">!</span>python3 -m  unittest  discover
-
-<span class="c1">#-v (--verbose) - подробный вывод.</span>
-<span class="c1">#-s (--start-directory) directory_name - директория начала обнаружения тестов (текущая по умолчанию).</span>
-<span class="c1">#-p (--pattern) pattern - шаблон названия файлов с тестами (по умолчанию test*.py).</span>
-<span class="c1">#-t (--top-level-directory) directory_name - директория верхнего уровня проекта (по умолчанию равна start-directory).</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>...
-----------------------------------------------------------------------
-Ran 3 tests in 0.000s
-
-OK
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">unittest</span> <span class="kn">import</span> <span class="n">TestLoader</span>
-<span class="n">help</span><span class="p">(</span><span class="n">TestLoader</span><span class="o">.</span><span class="n">discover</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Help on function discover in module unittest.loader:
-
-discover(self, start_dir, pattern=&#39;test*.py&#39;, top_level_dir=None)
-    Find and return all test modules from the specified start
-    directory, recursing into subdirectories to find them and return all
-    tests found within them. Only test files that match the pattern will
-    be loaded. (Using shell style pattern matching.)
-    
-    All test modules must be importable from the top level of the project.
-    If the start directory is not the top level directory then the top
-    level directory must be specified separately.
-    
-    If a test package name (directory with &#39;__init__.py&#39;) matches the
-    pattern then the package will be checked for a &#39;load_tests&#39; function. If
-    this exists then it will be called with (loader, tests, pattern) unless
-    the package has already had load_tests called from the same discovery
-    invocation, in which case the package module object is not scanned for
-    tests - this ensures that when a package uses discover to further
-    discover child tests that infinite recursion does not happen.
-    
-    If load_tests exists then discovery does *not* recurse into the package,
-    load_tests is responsible for loading all tests in the package.
-    
-    The pattern is deliberately not stored as a loader attribute so that
-    packages can continue discovery themselves. top_level_dir is stored so
-    load_tests does not need to pass this argument in to loader.discover().
-    
-    Paths are sorted before being imported to ensure reproducible execution
-    order even on filesystems with non-alphabetical ordering like ext3/4.
-
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="&#1054;&#1088;&#1075;&#1072;&#1085;&#1080;&#1079;&#1072;&#1094;&#1080;&#1103;-&#1090;&#1077;&#1089;&#1090;&#1086;&#1074;&#1086;&#1075;&#1086;-&#1082;&#1086;&#1076;&#1072;">&#1054;&#1088;&#1075;&#1072;&#1085;&#1080;&#1079;&#1072;&#1094;&#1080;&#1103; &#1090;&#1077;&#1089;&#1090;&#1086;&#1074;&#1086;&#1075;&#1086; &#1082;&#1086;&#1076;&#1072;<a class="anchor-link" href="#&#1054;&#1088;&#1075;&#1072;&#1085;&#1080;&#1079;&#1072;&#1094;&#1080;&#1103;-&#1090;&#1077;&#1089;&#1090;&#1086;&#1074;&#1086;&#1075;&#1086;-&#1082;&#1086;&#1076;&#1072;">&#182;</a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Создадим класс, который будем тестировать</span>
-
-<span class="k">class</span> <span class="nc">Widget</span><span class="p">():</span>
-    
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">50</span><span class="p">):</span>
-        
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
-        
-    <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        
-        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div></section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Базовые блоки тестирования это тестовые случаи - простые случаи, которые должны быть проверены на корректность.</p>
-<p>Тестовый случай создаётся путём наследования от unittest.TestCase.</p>
-<p>Тестирующий код должен быть самостоятельным, то есть никак не зависеть от других тестов.</p>
-<p>Простейший подкласс TestCase может просто реализовывать тестовый метод (метод, начинающийся с test)</p>
-
-</div>
-</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">DefaultWidgetSizeTestCase</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">test_default_widget_size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">widget</span> <span class="o">=</span> <span class="n">Widget</span><span class="p">(</span><span class="s1">&#39;The widget&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">widget</span><span class="o">.</span><span class="n">size</span><span class="p">(),</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">))</span>
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-
-    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,],</span> <span class="n">defaultTest</span><span class="o">=</span><span class="s1">&#39;DefaultWidgetSizeTestCase&#39;</span><span class="p">,</span> <span class="n">exit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dump_to</span><span class="p">(</span><span class="s1">&#39;./coinmarketcap/coinmarketcap/pipelines.py&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>.
-----------------------------------------------------------------------
-Ran 1 test in 0.001s
-
-OK
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[13]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&lt;unittest.main.TestProgram at 0x7f2d0c5ec5b0&gt;</pre>
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -13761,9 +15431,7 @@ OK
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Тестов может быть много, и часть кода настройки может повторяться. К счастью, мы можем определить код настройки путём реализации метода <strong>setUp()</strong>, который будет запускаться <em>перед</em> каждым тестом.</p>
-<p>Мы также можем определить метод <strong>tearDown()</strong>, который будет запускаться <em>после</em> каждого теста.</p>
-
+<h3 id="Settings:-&#1086;&#1073;&#1097;&#1080;&#1077;-&#1085;&#1072;&#1089;&#1090;&#1088;&#1086;&#1081;&#1082;&#1080;-scrapy">Settings: &#1086;&#1073;&#1097;&#1080;&#1077; &#1085;&#1072;&#1089;&#1090;&#1088;&#1086;&#1081;&#1082;&#1080; scrapy<a class="anchor-link" href="#Settings:-&#1086;&#1073;&#1097;&#1080;&#1077;-&#1085;&#1072;&#1089;&#1090;&#1088;&#1086;&#1081;&#1082;&#1080;-scrapy">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -13772,171 +15440,122 @@ OK
 <div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">SimpleWidgetTestCase</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">widget</span> <span class="o">=</span> <span class="n">Widget</span><span class="p">(</span><span class="s1">&#39;The widget&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-    <span class="k">def</span> <span class="nf">test_default_widget_size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">widget</span><span class="o">.</span><span class="n">size</span><span class="p">(),</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">50</span><span class="p">),</span>
-                         <span class="s1">&#39;incorrect default size&#39;</span><span class="p">)</span>
+<span class="c1"># Scrapy settings for coinmarketcap project</span>
+<span class="c1">#</span>
+<span class="c1"># For simplicity, this file contains only settings considered important or</span>
+<span class="c1"># commonly used. You can find more settings consulting the documentation:</span>
+<span class="c1">#</span>
+<span class="c1">#     https://doc.scrapy.org/en/latest/topics/settings.html</span>
+<span class="c1">#     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html</span>
+<span class="c1">#     https://doc.scrapy.org/en/latest/topics/spider-middleware.html</span>
 
-    <span class="k">def</span> <span class="nf">test_widget_resize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">widget</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">150</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">widget</span><span class="o">.</span><span class="n">size</span><span class="p">(),</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">150</span><span class="p">),</span>
-                         <span class="s1">&#39;wrong size after resize&#39;</span><span class="p">)</span>
-        
-    <span class="k">def</span> <span class="nf">tearDown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">pass</span>
-        
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="n">BOT_NAME</span> <span class="o">=</span> <span class="s1">&#39;coinmarketcap&#39;</span>
 
-    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,],</span> <span class="n">defaultTest</span><span class="o">=</span><span class="s1">&#39;SimpleWidgetTestCase&#39;</span><span class="p">,</span> <span class="n">exit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">SPIDER_MODULES</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;coinmarketcap.spiders&#39;</span><span class="p">]</span>
+<span class="n">NEWSPIDER_MODULE</span> <span class="o">=</span> <span class="s1">&#39;coinmarketcap.spiders&#39;</span>
+
+<span class="n">DATABASE</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;drivername&#39;</span><span class="p">:</span> <span class="s1">&#39;sqlite&#39;</span><span class="p">,</span>
+    <span class="c1"># &#39;host&#39;: &#39;localhost&#39;,</span>
+    <span class="c1"># &#39;port&#39;: &#39;5432&#39;,</span>
+    <span class="c1"># &#39;username&#39;: &#39;YOUR_USERNAME&#39;,</span>
+    <span class="c1"># &#39;password&#39;: &#39;YOUR_PASSWORD&#39;,</span>
+    <span class="s1">&#39;database&#39;</span><span class="p">:</span> <span class="s1">&#39;weekly.sqlite&#39;</span>
+<span class="p">}</span>
+
+<span class="c1"># Crawl responsibly by identifying yourself (and your website) on the user-agent</span>
+<span class="n">USER_AGENT</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">BOT_NAME</span><span class="p">)</span>
+
+<span class="c1"># Obey robots.txt rules</span>
+<span class="c1"># ROBOTSTXT_OBEY = True</span>
+
+<span class="c1"># Configure maximum concurrent requests performed by Scrapy (default: 16)</span>
+<span class="n">CONCURRENT_REQUESTS</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># Configure a delay for requests for the same website (default: 0)</span>
+<span class="c1"># See https://doc.scrapy.org/en/latest/topics/settings.html#download-delay</span>
+<span class="c1"># See also autothrottle settings and docs</span>
+<span class="c1">#DOWNLOAD_DELAY = 3</span>
+<span class="c1"># The download delay setting will honor only one of:</span>
+<span class="c1">#CONCURRENT_REQUESTS_PER_DOMAIN = 16</span>
+<span class="c1">#CONCURRENT_REQUESTS_PER_IP = 16</span>
+
+<span class="c1"># Disable cookies (enabled by default)</span>
+<span class="c1">#COOKIES_ENABLED = False</span>
+
+<span class="c1"># Disable Telnet Console (enabled by default)</span>
+<span class="c1">#TELNETCONSOLE_ENABLED = False</span>
+
+<span class="c1"># Override the default request headers:</span>
+<span class="c1">#DEFAULT_REQUEST_HEADERS = {</span>
+<span class="c1">#   &#39;Accept&#39;: &#39;text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&#39;,</span>
+<span class="c1">#   &#39;Accept-Language&#39;: &#39;en&#39;,</span>
+<span class="c1">#}</span>
+
+<span class="c1"># Enable or disable spider middlewares</span>
+<span class="c1"># See https://doc.scrapy.org/en/latest/topics/spider-middleware.html</span>
+<span class="c1">#SPIDER_MIDDLEWARES = {</span>
+<span class="c1">#    &#39;coinmarketcap.middlewares.CoinmarketcapSpiderMiddleware&#39;: 543,</span>
+<span class="c1">#}</span>
+
+<span class="c1"># Enable or disable downloader middlewares</span>
+<span class="c1"># See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html</span>
+<span class="c1">#DOWNLOADER_MIDDLEWARES = {</span>
+<span class="c1">#    &#39;coinmarketcap.middlewares.CoinmarketcapDownloaderMiddleware&#39;: 543,</span>
+<span class="c1">#}</span>
+
+<span class="c1"># Enable or disable extensions</span>
+<span class="c1"># See https://doc.scrapy.org/en/latest/topics/extensions.html</span>
+<span class="c1">#EXTENSIONS = {</span>
+<span class="c1">#    &#39;scrapy.extensions.telnet.TelnetConsole&#39;: None,</span>
+<span class="c1">#}</span>
+
+<span class="c1"># Configure item pipelines</span>
+<span class="c1"># See https://doc.scrapy.org/en/latest/topics/item-pipeline.html</span>
+<span class="n">ITEM_PIPELINES</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="s1">&#39;coinmarketcap.pipelines.SqlitePipeline&#39;</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="c1"># Enable and configure the AutoThrottle extension (disabled by default)</span>
+<span class="c1"># See https://doc.scrapy.org/en/latest/topics/autothrottle.html</span>
+<span class="n">AUTOTHROTTLE_ENABLED</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="c1"># The initial download delay</span>
+<span class="n">AUTOTHROTTLE_START_DELAY</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="c1"># The maximum download delay to be set in case of high latencies</span>
+<span class="n">AUTOTHROTTLE_MAX_DELAY</span> <span class="o">=</span> <span class="mi">60</span>
+<span class="c1"># The average number of requests Scrapy should be sending in parallel to</span>
+<span class="c1"># each remote server</span>
+<span class="c1">#AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0</span>
+<span class="c1"># Enable showing throttling stats for every response received:</span>
+<span class="c1">#AUTOTHROTTLE_DEBUG = False</span>
+
+<span class="c1"># Enable and configure HTTP caching (disabled by default)</span>
+<span class="c1"># See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings</span>
+<span class="c1">#HTTPCACHE_ENABLED = True</span>
+<span class="c1">#HTTPCACHE_EXPIRATION_SECS = 0</span>
+<span class="c1">#HTTPCACHE_DIR = &#39;httpcache&#39;</span>
+<span class="c1">#HTTPCACHE_IGNORE_HTTP_CODES = []</span>
+<span class="c1">#HTTPCACHE_STORAGE = &#39;scrapy.extensions.httpcache.FilesystemCacheStorage&#39;</span>
+
+<span class="n">LOG_FILE</span> <span class="o">=</span> <span class="s1">&#39;crawling.log&#39;</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>.E
-======================================================================
-ERROR: test_widget_resize (__main__.SimpleWidgetTestCase)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File &#34;&lt;ipython-input-14-51019ea8cce9&gt;&#34;, line 10, in test_widget_resize
-    self.widget.resize(100,150)
-AttributeError: &#39;Widget&#39; object has no attribute &#39;resize&#39;
-
-----------------------------------------------------------------------
-Ran 2 tests in 0.003s
-
-FAILED (errors=1)
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[14]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&lt;unittest.main.TestProgram at 0x7f2d0c5faa60&gt;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div></section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Можно разместить все тесты в том же файле, что и сама программа (таком как widgets.py), но размещение тестов в отдельном файле (таком как test_widget.py) имеет много преимуществ:</p>
-<ul>
-<li>Модуль с тестом может быть запущен автономно из командной строки.</li>
-<li>Тестовый код может быть легко отделён от программы.</li>
-<li>Меньше искушения изменить тесты для соответствия коду программы без видимой причины.</li>
-<li>Тестовый код должен изменяться гораздо реже, чем программа.</li>
-<li>Протестированный код может быть легче переработан.</li>
-<li>Тесты для модулей на C должны быть в отдельных модулях, так почему же не быть последовательным?</li>
-<li>Если стратегия тестирования изменяется, нет необходимости изменения кода программы.</li>
-</ul>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="&#1055;&#1088;&#1086;&#1087;&#1091;&#1089;&#1082;-&#1090;&#1077;&#1089;&#1090;&#1086;&#1074;-&#1080;-&#1086;&#1078;&#1080;&#1076;&#1072;&#1077;&#1084;&#1099;&#1077;-&#1086;&#1096;&#1080;&#1073;&#1082;&#1080;">&#1055;&#1088;&#1086;&#1087;&#1091;&#1089;&#1082; &#1090;&#1077;&#1089;&#1090;&#1086;&#1074; &#1080; &#1086;&#1078;&#1080;&#1076;&#1072;&#1077;&#1084;&#1099;&#1077; &#1086;&#1096;&#1080;&#1073;&#1082;&#1080;<a class="anchor-link" href="#&#1055;&#1088;&#1086;&#1087;&#1091;&#1089;&#1082;-&#1090;&#1077;&#1089;&#1090;&#1086;&#1074;-&#1080;-&#1086;&#1078;&#1080;&#1076;&#1072;&#1077;&#1084;&#1099;&#1077;-&#1086;&#1096;&#1080;&#1073;&#1082;&#1080;">&#182;</a></h2><p>unittest поддерживает пропуск отдельных тестов, а также классов тестов. Вдобавок, поддерживается пометка теста как "не работает, но так и надо".</p>
-<p>Пропуск теста осуществляется использованием декоратора <strong>skip()</strong> или одного из его условных вариантов.</p>
-
-</div>
-</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">__version__</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
-<span class="n">platform</span> <span class="o">=</span> <span class="s2">&quot;ubuntu&quot;</span>
-
-
-<span class="k">class</span> <span class="nc">MyTestCase</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
-
-    <span class="nd">@unittest</span><span class="o">.</span><span class="n">skip</span><span class="p">(</span><span class="s2">&quot;demonstrating skipping&quot;</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">test_nothing</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">&quot;shouldn&#39;t happen&quot;</span><span class="p">)</span>
-
-    <span class="nd">@unittest</span><span class="o">.</span><span class="n">skipIf</span><span class="p">(</span><span class="n">__version__</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
-                     <span class="s2">&quot;not supported in this library version&quot;</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">test_format</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># Tests that work for only a certain version of the library.</span>
-        <span class="k">pass</span>
-
-    <span class="nd">@unittest</span><span class="o">.</span><span class="n">skipUnless</span><span class="p">(</span><span class="n">platform</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;win&quot;</span><span class="p">),</span> <span class="s2">&quot;requires Windows&quot;</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">test_windows_support</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># windows specific testing code</span>
-        <span class="k">pass</span>
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-
-    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="s1">&#39;-v&#39;</span><span class="p">],</span> <span class="n">defaultTest</span><span class="o">=</span><span class="s1">&#39;MyTestCase&#39;</span><span class="p">,</span> <span class="n">exit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dump_to</span><span class="p">(</span><span class="s1">&#39;./coinmarketcap/coinmarketcap/settings.py&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>test_format (__main__.MyTestCase) ... skipped &#39;not supported in this library version&#39;
-test_nothing (__main__.MyTestCase) ... skipped &#39;demonstrating skipping&#39;
-test_windows_support (__main__.MyTestCase) ... skipped &#39;requires Windows&#39;
-
-----------------------------------------------------------------------
-Ran 3 tests in 0.010s
-
-OK (skipped=3)
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[15]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&lt;unittest.main.TestProgram at 0x7f2d0c5fa700&gt;</pre>
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -13944,7 +15563,8 @@ OK (skipped=3)
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="&#1050;&#1083;&#1072;&#1089;&#1089;&#1099;-&#1090;&#1072;&#1082;&#1078;&#1077;-&#1084;&#1086;&#1075;&#1091;&#1090;-&#1073;&#1099;&#1090;&#1100;-&#1087;&#1088;&#1086;&#1087;&#1091;&#1097;&#1077;&#1085;&#1099;:">&#1050;&#1083;&#1072;&#1089;&#1089;&#1099; &#1090;&#1072;&#1082;&#1078;&#1077; &#1084;&#1086;&#1075;&#1091;&#1090; &#1073;&#1099;&#1090;&#1100; &#1087;&#1088;&#1086;&#1087;&#1091;&#1097;&#1077;&#1085;&#1099;:<a class="anchor-link" href="#&#1050;&#1083;&#1072;&#1089;&#1089;&#1099;-&#1090;&#1072;&#1082;&#1078;&#1077;-&#1084;&#1086;&#1075;&#1091;&#1090;-&#1073;&#1099;&#1090;&#1100;-&#1087;&#1088;&#1086;&#1087;&#1091;&#1097;&#1077;&#1085;&#1099;:">&#182;</a></h4>
+<p>Посмотрим на структуру scrapy проекта ещё раз</p>
+
 </div>
 </div>
 </div>
@@ -13953,14 +15573,7 @@ OK (skipped=3)
 <div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@unittest</span><span class="o">.</span><span class="n">skip</span><span class="p">(</span><span class="s2">&quot;showing class skipping&quot;</span><span class="p">)</span>
-<span class="k">class</span> <span class="nc">MySkippedTestCase</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">test_not_run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">pass</span>
-    
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-
-    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="s1">&#39;-v&#39;</span><span class="p">],</span> <span class="n">defaultTest</span><span class="o">=</span><span class="s1">&#39;MySkippedTestCase&#39;</span><span class="p">,</span> <span class="n">exit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="nb">cd</span> coinmarketcap<span class="p">;</span> ls -R
 </pre></div>
 
     </div>
@@ -13976,28 +15589,17 @@ OK (skipped=3)
     <div class="prompt"></div>
 
 
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>test_not_run (__main__.MySkippedTestCase) ... skipped &#39;showing class skipping&#39;
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>.:
+coinmarketcap  scrapy.cfg
 
-----------------------------------------------------------------------
-Ran 1 test in 0.002s
+./coinmarketcap:
+__init__.py  items.py  middlewares.py  pipelines.py  settings.py  spiders
 
-OK (skipped=1)
+./coinmarketcap/spiders:
+__init__.py  weekly.py
 </pre>
 </div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[16]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&lt;unittest.main.TestProgram at 0x7f2d0c5fa280&gt;</pre>
-</div>
-
 </div>
 
 </div>
@@ -14007,7 +15609,8 @@ OK (skipped=1)
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="&#1054;&#1078;&#1080;&#1076;&#1072;&#1077;&#1084;&#1099;&#1077;-&#1086;&#1096;&#1080;&#1073;&#1082;&#1080;-&#1080;&#1089;&#1087;&#1086;&#1083;&#1100;&#1079;&#1091;&#1102;&#1090;-&#1076;&#1077;&#1082;&#1086;&#1088;&#1072;&#1090;&#1086;&#1088;-expectedFailure():">&#1054;&#1078;&#1080;&#1076;&#1072;&#1077;&#1084;&#1099;&#1077; &#1086;&#1096;&#1080;&#1073;&#1082;&#1080; &#1080;&#1089;&#1087;&#1086;&#1083;&#1100;&#1079;&#1091;&#1102;&#1090; &#1076;&#1077;&#1082;&#1086;&#1088;&#1072;&#1090;&#1086;&#1088; expectedFailure():<a class="anchor-link" href="#&#1054;&#1078;&#1080;&#1076;&#1072;&#1077;&#1084;&#1099;&#1077;-&#1086;&#1096;&#1080;&#1073;&#1082;&#1080;-&#1080;&#1089;&#1087;&#1086;&#1083;&#1100;&#1079;&#1091;&#1102;&#1090;-&#1076;&#1077;&#1082;&#1086;&#1088;&#1072;&#1090;&#1086;&#1088;-expectedFailure():">&#182;</a></h4>
+<h3 id="&#1042;&#1089;&#1105;!">&#1042;&#1089;&#1105;!<a class="anchor-link" href="#&#1042;&#1089;&#1105;!">&#182;</a></h3><p>Запустим паука!</p>
+
 </div>
 </div>
 </div>
@@ -14016,14 +15619,8 @@ OK (skipped=1)
 <div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">ExpectedFailureTestCase</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="nd">@unittest</span><span class="o">.</span><span class="n">expectedFailure</span>
-    <span class="k">def</span> <span class="nf">test_fail</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;broken&quot;</span><span class="p">)</span>
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-
-    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="s1">&#39;-v&#39;</span><span class="p">],</span> <span class="n">defaultTest</span><span class="o">=</span><span class="s1">&#39;ExpectedFailureTestCase&#39;</span><span class="p">,</span> <span class="n">exit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>        
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>it -n 1 -r 1
+<span class="err">!</span><span class="n">cd</span> <span class="n">coinmarketcap</span> <span class="p">;</span> <span class="n">scrapy</span> <span class="n">crawl</span> <span class="n">weekly</span>
 </pre></div>
 
     </div>
@@ -14039,28 +15636,14 @@ OK (skipped=1)
     <div class="prompt"></div>
 
 
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>test_fail (__main__.ExpectedFailureTestCase) ... expected failure
-
-----------------------------------------------------------------------
-Ran 1 test in 0.002s
-
-OK (expected failures=1)
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>https://coinmarketcap.com/historical/20190407/
+https://coinmarketcap.com/historical/20190428/
+https://coinmarketcap.com/historical/20190421/
+https://coinmarketcap.com/historical/20190414/
+40.7 s ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
 </pre>
 </div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[17]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&lt;unittest.main.TestProgram at 0x7f2d0c62c2e0&gt;</pre>
-</div>
-
 </div>
 
 </div>
@@ -14070,33 +15653,24 @@ OK (expected failures=1)
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="&#1054;&#1095;&#1077;&#1085;&#1100;-&#1087;&#1088;&#1086;&#1089;&#1090;&#1086;-&#1089;&#1076;&#1077;&#1083;&#1072;&#1090;&#1100;-&#1089;&#1074;&#1086;&#1081;-&#1076;&#1077;&#1082;&#1086;&#1088;&#1072;&#1090;&#1086;&#1088;.-&#1053;&#1072;&#1087;&#1088;&#1080;&#1084;&#1077;&#1088;,-&#1089;&#1083;&#1077;&#1076;&#1091;&#1102;&#1097;&#1080;&#1081;-&#1076;&#1077;&#1082;&#1086;&#1088;&#1072;&#1090;&#1086;&#1088;-&#1087;&#1088;&#1086;&#1087;&#1091;&#1089;&#1082;&#1072;&#1077;&#1090;-&#1090;&#1077;&#1089;&#1090;,-&#1077;&#1089;&#1083;&#1080;-&#1087;&#1077;&#1088;&#1077;&#1076;&#1072;&#1085;&#1085;&#1099;&#1081;-&#1086;&#1073;&#1098;&#1077;&#1082;&#1090;-&#1085;&#1077;-&#1080;&#1084;&#1077;&#1077;&#1090;-&#1091;&#1082;&#1072;&#1079;&#1072;&#1085;&#1085;&#1086;&#1075;&#1086;-&#1072;&#1090;&#1088;&#1080;&#1073;&#1091;&#1090;&#1072;.">&#1054;&#1095;&#1077;&#1085;&#1100; &#1087;&#1088;&#1086;&#1089;&#1090;&#1086; &#1089;&#1076;&#1077;&#1083;&#1072;&#1090;&#1100; &#1089;&#1074;&#1086;&#1081; &#1076;&#1077;&#1082;&#1086;&#1088;&#1072;&#1090;&#1086;&#1088;. &#1053;&#1072;&#1087;&#1088;&#1080;&#1084;&#1077;&#1088;, &#1089;&#1083;&#1077;&#1076;&#1091;&#1102;&#1097;&#1080;&#1081; &#1076;&#1077;&#1082;&#1086;&#1088;&#1072;&#1090;&#1086;&#1088; &#1087;&#1088;&#1086;&#1087;&#1091;&#1089;&#1082;&#1072;&#1077;&#1090; &#1090;&#1077;&#1089;&#1090;, &#1077;&#1089;&#1083;&#1080; &#1087;&#1077;&#1088;&#1077;&#1076;&#1072;&#1085;&#1085;&#1099;&#1081; &#1086;&#1073;&#1098;&#1077;&#1082;&#1090; &#1085;&#1077; &#1080;&#1084;&#1077;&#1077;&#1090; &#1091;&#1082;&#1072;&#1079;&#1072;&#1085;&#1085;&#1086;&#1075;&#1086; &#1072;&#1090;&#1088;&#1080;&#1073;&#1091;&#1090;&#1072;.<a class="anchor-link" href="#&#1054;&#1095;&#1077;&#1085;&#1100;-&#1087;&#1088;&#1086;&#1089;&#1090;&#1086;-&#1089;&#1076;&#1077;&#1083;&#1072;&#1090;&#1100;-&#1089;&#1074;&#1086;&#1081;-&#1076;&#1077;&#1082;&#1086;&#1088;&#1072;&#1090;&#1086;&#1088;.-&#1053;&#1072;&#1087;&#1088;&#1080;&#1084;&#1077;&#1088;,-&#1089;&#1083;&#1077;&#1076;&#1091;&#1102;&#1097;&#1080;&#1081;-&#1076;&#1077;&#1082;&#1086;&#1088;&#1072;&#1090;&#1086;&#1088;-&#1087;&#1088;&#1086;&#1087;&#1091;&#1089;&#1082;&#1072;&#1077;&#1090;-&#1090;&#1077;&#1089;&#1090;,-&#1077;&#1089;&#1083;&#1080;-&#1087;&#1077;&#1088;&#1077;&#1076;&#1072;&#1085;&#1085;&#1099;&#1081;-&#1086;&#1073;&#1098;&#1077;&#1082;&#1090;-&#1085;&#1077;-&#1080;&#1084;&#1077;&#1077;&#1090;-&#1091;&#1082;&#1072;&#1079;&#1072;&#1085;&#1085;&#1086;&#1075;&#1086;-&#1072;&#1090;&#1088;&#1080;&#1073;&#1091;&#1090;&#1072;.">&#182;</a></h4><p>Для пропущенных тестов не запускаются setUp() и tearDown(). Для пропущенных классов не запускаются setUpClass() и tearDownClass(). Для пропущенных модулей не запускаются setUpModule() и tearDownModule().</p>
+<p>Посмотрим, что получилось:</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">obj1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sqlite3</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
+<span class="n">connection</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;./coinmarketcap/weekly.sqlite&#39;</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">skipUnlessHasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">attr</span><span class="p">):</span>
-    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">attr</span><span class="p">):</span>
-        <span class="k">return</span> <span class="k">lambda</span> <span class="n">func</span><span class="p">:</span> <span class="n">func</span>
-    <span class="k">return</span> <span class="n">unittest</span><span class="o">.</span><span class="n">skip</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{!r}</span><span class="s2"> doesn&#39;t have </span><span class="si">{!r}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">attr</span><span class="p">))</span>
-
-
-<span class="k">class</span> <span class="nc">YetAnotherTestCase</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="nd">@skipUnlessHasattr</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span><span class="s1">&#39;add&#39;</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">test_fail</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">pass</span>
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-
-    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="s1">&#39;-v&#39;</span><span class="p">],</span> <span class="n">defaultTest</span><span class="o">=</span><span class="s1">&#39;YetAnotherTestCase&#39;</span><span class="p">,</span> <span class="n">exit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>        
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM currency&quot;</span><span class="p">,</span> <span class="n">connection</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -14112,475 +15686,98 @@ OK (expected failures=1)
     <div class="prompt"></div>
 
 
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>test_fail (__main__.YetAnotherTestCase) ... skipped &#34;[1, 2, 3] doesn&#39;t have &#39;add&#39;&#34;
-
-----------------------------------------------------------------------
-Ran 1 test in 0.004s
-
-OK (skipped=1)
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(800, 6)
 </pre>
 </div>
 </div>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[21]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&lt;unittest.main.TestProgram at 0x7f2d0c5761f0&gt;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div></section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="&#1069;&#1081;,-&#1072;-&#1095;&#1090;&#1086;-&#1077;&#1097;&#1105;-&#1079;&#1072;-setUpClass()-&#1080;-setUpModule()-??">&#1069;&#1081;, &#1072; &#1095;&#1090;&#1086; &#1077;&#1097;&#1105; &#1079;&#1072; setUpClass() &#1080; setUpModule() ??<a class="anchor-link" href="#&#1069;&#1081;,-&#1072;-&#1095;&#1090;&#1086;-&#1077;&#1097;&#1105;-&#1079;&#1072;-setUpClass()-&#1080;-setUpModule()-??">&#182;</a></h4>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">unittest</span>
-
-<span class="k">class</span> <span class="nc">Test</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">setUpClass</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
-        <span class="bp">cls</span><span class="o">.</span><span class="n">_connection</span> <span class="o">=</span> <span class="n">createExpensiveConnectionObject</span><span class="p">()</span>
-
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">tearDownClass</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
-        <span class="bp">cls</span><span class="o">.</span><span class="n">_connection</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
-        
-
-<span class="c1">#These should be implemented as functions:</span>
-
-<span class="k">def</span> <span class="nf">setUpModule</span><span class="p">():</span>
-    <span class="n">createConnection</span><span class="p">()</span>
-
-<span class="k">def</span> <span class="nf">tearDownModule</span><span class="p">():</span>
-    <span class="n">closeConnection</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div></section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="&#1056;&#1072;&#1079;&#1083;&#1080;&#1095;&#1077;&#1085;&#1080;&#1077;-&#1080;&#1090;&#1077;&#1088;&#1072;&#1094;&#1080;&#1081;-&#1090;&#1077;&#1089;&#1090;&#1072;-&#1089;-&#1087;&#1086;&#1084;&#1086;&#1097;&#1100;&#1102;-&#1087;&#1086;&#1076;&#1090;&#1077;&#1089;&#1090;&#1086;&#1074;">&#1056;&#1072;&#1079;&#1083;&#1080;&#1095;&#1077;&#1085;&#1080;&#1077; &#1080;&#1090;&#1077;&#1088;&#1072;&#1094;&#1080;&#1081; &#1090;&#1077;&#1089;&#1090;&#1072; &#1089; &#1087;&#1086;&#1084;&#1086;&#1097;&#1100;&#1102; &#1087;&#1086;&#1076;&#1090;&#1077;&#1089;&#1090;&#1086;&#1074;<a class="anchor-link" href="#&#1056;&#1072;&#1079;&#1083;&#1080;&#1095;&#1077;&#1085;&#1080;&#1077;-&#1080;&#1090;&#1077;&#1088;&#1072;&#1094;&#1080;&#1081;-&#1090;&#1077;&#1089;&#1090;&#1072;-&#1089;-&#1087;&#1086;&#1084;&#1086;&#1097;&#1100;&#1102;-&#1087;&#1086;&#1076;&#1090;&#1077;&#1089;&#1090;&#1086;&#1074;">&#182;</a></h4><p>Когда некоторые тесты имеют лишь незначительные отличия, например некоторые параметры, unittest позволяет различать их внутри одного тестового метода, используя менеджер контекста <strong>subTest()</strong>.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">NumbersTest</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
-
-    <span class="k">def</span> <span class="nf">test_even</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Test that numbers between 0 and 3 are all even.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
-            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">subTest</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-                
-<span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="s1">&#39;-v&#39;</span><span class="p">],</span> <span class="n">defaultTest</span><span class="o">=</span><span class="s1">&#39;NumbersTest&#39;</span><span class="p">,</span> <span class="n">exit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>           
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>test_even (__main__.NumbersTest)
-Test that numbers between 0 and 3 are all even. ... 
-======================================================================
-FAIL: test_even (__main__.NumbersTest) (i=1)
-Test that numbers between 0 and 3 are all even.
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File &#34;&lt;ipython-input-19-ab3b51304b7e&gt;&#34;, line 9, in test_even
-    self.assertEqual(i % 2, 0)
-AssertionError: 1 != 0
-
-======================================================================
-FAIL: test_even (__main__.NumbersTest) (i=3)
-Test that numbers between 0 and 3 are all even.
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File &#34;&lt;ipython-input-19-ab3b51304b7e&gt;&#34;, line 9, in test_even
-    self.assertEqual(i % 2, 0)
-AssertionError: 1 != 0
-
-----------------------------------------------------------------------
-Ran 1 test in 0.003s
-
-FAILED (failures=2)
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[19]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&lt;unittest.main.TestProgram at 0x7f2d0c5fa190&gt;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="&#1055;&#1088;&#1086;&#1074;&#1077;&#1088;&#1082;&#1080;-&#1085;&#1072;-&#1091;&#1089;&#1087;&#1077;&#1096;&#1085;&#1086;&#1089;&#1090;&#1100;">&#1055;&#1088;&#1086;&#1074;&#1077;&#1088;&#1082;&#1080; &#1085;&#1072; &#1091;&#1089;&#1087;&#1077;&#1096;&#1085;&#1086;&#1089;&#1090;&#1100;<a class="anchor-link" href="#&#1055;&#1088;&#1086;&#1074;&#1077;&#1088;&#1082;&#1080;-&#1085;&#1072;-&#1091;&#1089;&#1087;&#1077;&#1096;&#1085;&#1086;&#1089;&#1090;&#1100;">&#182;</a></h4><p>Модуль unittest предоставляет множество функций для самых различных проверок:</p>
-
-<pre><code>assertEqual(a, b) — a == b
-
-assertNotEqual(a, b) — a != b
-
-assertTrue(x) — bool(x) is True
-
-assertFalse(x) — bool(x) is False
-
-assertIs(a, b) — a is b
-
-assertIsNot(a, b) — a is not b
-
-assertIsNone(x) — x is None
-
-assertIsNotNone(x) — x is not None
-
-assertIn(a, b) — a in b
-
-assertNotIn(a, b) — a not in b
-
-assertIsInstance(a, b) — isinstance(a, b)
-
-assertNotIsInstance(a, b) — not isinstance(a, b)
-
-assertRaises(exc, fun, *args, **kwds) — fun(*args, **kwds) порождает исключение exc
-
-assertRaisesRegex(exc, r, fun, *args, **kwds) — fun(*args, **kwds) порождает исключение exc и сообщение соответствует регулярному выражению r
-
-assertWarns(warn, fun, *args, **kwds) — fun(*args, **kwds) порождает предупреждение
-
-assertWarnsRegex(warn, r, fun, *args, **kwds) — fun(*args, **kwds) порождает предупреждение и сообщение соответствует регулярному выражению r
-
-assertAlmostEqual(a, b) — round(a-b, 7) == 0
-
-assertNotAlmostEqual(a, b) — round(a-b, 7) != 0
-
-assertGreater(a, b) — a &gt; b
-
-assertGreaterEqual(a, b) — a &gt;= b
-
-assertLess(a, b) — a &lt; b
-
-assertLessEqual(a, b) — a &lt;= b
-
-assertRegex(s, r) — r.search(s)
-
-assertNotRegex(s, r) — not r.search(s)
-
-assertCountEqual(a, b) — a и b содержат те же элементы в одинаковых количествах, но порядок не важен</code></pre>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="&#1045;&#1089;&#1083;&#1080;-&#1084;&#1099;-&#1093;&#1086;&#1090;&#1080;&#1084;-&#1082;&#1072;&#1089;&#1090;&#1086;&#1084;&#1080;&#1079;&#1080;&#1088;&#1086;&#1074;&#1072;&#1090;&#1100;-&#1079;&#1072;&#1087;&#1091;&#1089;&#1082;-&#1080;&#1084;&#1077;&#1102;&#1097;&#1080;&#1093;&#1089;&#1103;-&#1090;&#1077;&#1089;&#1090;&#1086;&#1074;">&#1045;&#1089;&#1083;&#1080; &#1084;&#1099; &#1093;&#1086;&#1090;&#1080;&#1084; &#1082;&#1072;&#1089;&#1090;&#1086;&#1084;&#1080;&#1079;&#1080;&#1088;&#1086;&#1074;&#1072;&#1090;&#1100; &#1079;&#1072;&#1087;&#1091;&#1089;&#1082; &#1080;&#1084;&#1077;&#1102;&#1097;&#1080;&#1093;&#1089;&#1103; &#1090;&#1077;&#1089;&#1090;&#1086;&#1074;<a class="anchor-link" href="#&#1045;&#1089;&#1083;&#1080;-&#1084;&#1099;-&#1093;&#1086;&#1090;&#1080;&#1084;-&#1082;&#1072;&#1089;&#1090;&#1086;&#1084;&#1080;&#1079;&#1080;&#1088;&#1086;&#1074;&#1072;&#1090;&#1100;-&#1079;&#1072;&#1087;&#1091;&#1089;&#1082;-&#1080;&#1084;&#1077;&#1102;&#1097;&#1080;&#1093;&#1089;&#1103;-&#1090;&#1077;&#1089;&#1090;&#1086;&#1074;">&#182;</a></h4>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[27]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">MySuite</span><span class="p">():</span>
-    <span class="n">suite</span> <span class="o">=</span> <span class="n">unittest</span><span class="o">.</span><span class="n">TestSuite</span><span class="p">()</span>
-    <span class="n">suite</span><span class="o">.</span><span class="n">addTest</span><span class="p">(</span><span class="n">SimpleWidgetTestCase</span><span class="p">(</span><span class="s1">&#39;test_default_widget_size&#39;</span><span class="p">))</span>
-    <span class="n">suite</span><span class="o">.</span><span class="n">addTest</span><span class="p">(</span><span class="n">SimpleWidgetTestCase</span><span class="p">(</span><span class="s1">&#39;test_widget_resize&#39;</span><span class="p">))</span>
-    <span class="n">suite</span><span class="o">.</span><span class="n">addTest</span><span class="p">(</span><span class="n">NumbersTest</span><span class="p">(</span><span class="s1">&#39;test_even&#39;</span><span class="p">))</span>
-    <span class="n">suite</span><span class="o">.</span><span class="n">addTest</span><span class="p">(</span><span class="n">YetAnotherTestCase</span><span class="p">(</span><span class="s1">&#39;test_fail&#39;</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">suite</span>
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">runner</span> <span class="o">=</span> <span class="n">unittest</span><span class="o">.</span><span class="n">TextTestRunner</span><span class="p">(</span><span class="n">verbosity</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">runner</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">MySuite</span><span class="p">())</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>test_default_widget_size (__main__.SimpleWidgetTestCase) ... ok
-test_widget_resize (__main__.SimpleWidgetTestCase) ... ERROR
-test_even (__main__.NumbersTest)
-Test that numbers between 0 and 3 are all even. ... test_fail (__main__.YetAnotherTestCase) ... skipped &#34;[1, 2, 3] doesn&#39;t have &#39;add&#39;&#34;
-
-======================================================================
-ERROR: test_widget_resize (__main__.SimpleWidgetTestCase)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File &#34;&lt;ipython-input-14-51019ea8cce9&gt;&#34;, line 10, in test_widget_resize
-    self.widget.resize(100,150)
-AttributeError: &#39;Widget&#39; object has no attribute &#39;resize&#39;
-
-======================================================================
-FAIL: test_even (__main__.NumbersTest) (i=1)
-Test that numbers between 0 and 3 are all even.
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File &#34;&lt;ipython-input-19-ab3b51304b7e&gt;&#34;, line 9, in test_even
-    self.assertEqual(i % 2, 0)
-AssertionError: 1 != 0
-
-======================================================================
-FAIL: test_even (__main__.NumbersTest) (i=3)
-Test that numbers between 0 and 3 are all even.
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File &#34;&lt;ipython-input-19-ab3b51304b7e&gt;&#34;, line 9, in test_even
-    self.assertEqual(i % 2, 0)
-AssertionError: 1 != 0
-
-----------------------------------------------------------------------
-Ran 4 tests in 0.010s
-
-FAILED (failures=2, errors=1, skipped=1)
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[27]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&lt;unittest.runner.TextTestResult run=4 errors=1 failures=2&gt;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-    </div>
+    <div class="prompt output_prompt">Out[18]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>date</th>
+      <th>name</th>
+      <th>symbol</th>
+      <th>market_cap</th>
+      <th>price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>2019-04-07</td>
+      <td>Bitcoin</td>
+      <td>BTC</td>
+      <td>$91,674,230,186</td>
+      <td>$5,198.90</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>2019-04-07</td>
+      <td>Ethereum</td>
+      <td>ETH</td>
+      <td>$18,424,576,820</td>
+      <td>$174.53</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>2019-04-07</td>
+      <td>XRP</td>
+      <td>XRP</td>
+      <td>$15,021,731,305</td>
+      <td>$0.3599</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>2019-04-07</td>
+      <td>Bitcoin Cash</td>
+      <td>BCH</td>
+      <td>$5,662,007,844</td>
+      <td>$319.60</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>2019-04-07</td>
+      <td>Litecoin</td>
+      <td>LTC</td>
+      <td>$5,653,406,711</td>
+      <td>$92.31</td>
+    </tr>
+  </tbody>
+</table>
 </div>
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
 
-    </div>
 </div>
 </div>
 
