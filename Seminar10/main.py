@@ -2,6 +2,9 @@ from typing import Optional
 
 from fastapi import FastAPI
 
+# install: pip install fastapi uvicorn
+# run: uvicorn main:app
+# provides docs here: http://127.0.0.1:8000/docs
 app = FastAPI()
 
 
